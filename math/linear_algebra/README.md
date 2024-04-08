@@ -67,5 +67,16 @@ You can assume all elements in the same dimension are of the same type/shape
 You must return a new matrix
 If mat1 and mat2 are not the same shape, return None
 
+### 6. Howdy Partner
+Write a function def cat_arrays(arr1, arr2): that concatenates two arrays:
 
+You can assume that arr1 and arr2 are lists of ints/floats
+You must return a new list
 
+### 7. Gettin’ Cozy
+Write a function def cat_matrices2D(mat1, mat2, axis=0): that concatenates two matrices along a specific axis:
+
+You can assume that mat1 and mat2 are 2D matrices containing ints/floats
+You can assume all elements in the same dimension are of the same type/shape
+You must return a new matrix
+If the two matrices cannot be concatenated, return None
