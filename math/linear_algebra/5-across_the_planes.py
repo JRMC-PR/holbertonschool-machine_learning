@@ -1,4 +1,4 @@
-#!/usr/bin/even python3
+#!/usr/bin/env python3
 """ adds two matrices element-wise """
 
 
