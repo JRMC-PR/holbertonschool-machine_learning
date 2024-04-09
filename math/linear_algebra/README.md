@@ -18,6 +18,7 @@ arr2 should be the last five numbers of arr
 arr3 should be the 2nd through 6th numbers of arr
 You are not allowed to use any loops or conditional statements
 Your program should be exactly 8 lines
+
 ### 1. Trim Me Down
 Complete the following source code (found below):
 #!/usr/bin/env python3
@@ -80,3 +81,31 @@ You can assume that mat1 and mat2 are 2D matrices containing ints/floats
 You can assume all elements in the same dimension are of the same type/shape
 You must return a new matrix
 If the two matrices cannot be concatenated, return None
+
+### 8. Ridin’ Bareback
+Write a function def mat_mul(mat1, mat2): that performs matrix multiplication:
+
+You can assume that mat1 and mat2 are 2D matrices containing ints/floats
+You can assume all elements in the same dimension are of the same type/shape
+You must return a new matrix
+If the two matrices cannot be multiplied, return None
+
+### 9. Let The Butcher Slice It
+Complete the following source code (found below):
+
+#!/usr/bin/env python3
+import numpy as np
+matrix = np.array([[1, 2, 3, 4, 5, 6], [7, 8, 9, 10, 11, 12],
+                   [13, 14, 15, 16, 17, 18], [19, 20, 21, 22, 23, 24]])
+mat1 =  # your code here
+mat2 =  # your code here
+mat3 =  # your code here
+print("The middle two rows of the matrix are:\n{}".format(mat1))
+print("The middle two columns of the matrix are:\n{}".format(mat2))
+print("The bottom-right, square, 3x3 matrix is:\n{}".format(mat3))
+
+mat1 should be the middle two rows of matrix
+mat2 should be the middle two columns of matrix
+mat3 should be the bottom-right, square, 3x3 matrix of matrix
+You are not allowed to use any loops or conditional statements
+Your program should be exactly 10 lines
