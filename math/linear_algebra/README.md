@@ -117,3 +117,10 @@ You are not allowed to use any loops or conditional statements
 You are not allowed to use try/except statements
 The shape should be returned as a tuple of integers
 
+### 11. The Western Exchange
+Write a function def np_transpose(matrix): that transposes matrix:
+
+You can assume that matrix can be interpreted as a numpy.ndarray
+You are not allowed to use any loops or conditional statements
+You must return a new numpy.ndarray
+
