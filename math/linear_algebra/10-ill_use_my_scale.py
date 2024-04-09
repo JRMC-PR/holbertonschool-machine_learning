@@ -1,4 +1,4 @@
-#!/usr/bin/encv python3
+#!/usr/bin/env python3
 """calculates a matrix shape """
 
 
