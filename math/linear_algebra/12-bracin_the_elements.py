@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """Performs element-wise arithmetic operations on two numpy arrays"""
 
+
 def np_elementwise(mat1, mat2):
     """
     Performs element-wise arithmetic operations on two numpy arrays.
