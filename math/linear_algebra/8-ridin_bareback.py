@@ -10,11 +10,13 @@ def mat_mul(mat1, mat2):
         mat1 (int/floats): Holds the matinx list
         mat2 (int/floats): Holds the matrix list
     """ """"""
-    # if the number of columns of mat1 is not equal to the number of rows of mat2
+    # if the number of columns of mat1 is not equal
+    # to the number of rows of mat2
     if len(mat1[0]) != len(mat2):
         return None
 
-    # create a list of lists with the number of rows of mat1 and the number of columns of mat2
+    # create a list of lists with the number of rows
+    # of mat1 and the number of columns of mat2
     # initialize all values to 0
     new_mat = [[0 for col in range(len(mat2[0]))] for row in range(len(mat1))]
 
