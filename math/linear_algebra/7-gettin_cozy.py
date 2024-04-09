@@ -12,13 +12,13 @@ def cat_matrices2D(mat1, mat2, axis=0):
         return None
 
     CAT = []
-    # concatenate along columns
+    # concatenate along columns (vertical stacking)
     if axis == 0:
       for i in mat1:
         CAT.append(i.copy())
       for j in mat2:
         CAT.append(j.copy())
-    # concatenate along rows
+    # concatenate along rows (horizontal stacking)
     else:
       for i in range(len(mat1)):
           CAT.append(mat1[i] + mat2[i])
