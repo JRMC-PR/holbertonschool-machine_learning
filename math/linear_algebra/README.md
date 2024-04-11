@@ -1,5 +1,83 @@
-# holbertonschool-machine_learning
-Linear Algebra
+# Holberton School - Machine Learning
+## Linear Algebra
+This module covers the fundamentals of Linear Algebra, essential for Machine Learning.
+
+### General Concepts
+
+#### **What is a vector?**
+A one-dimensional array of numbers.
+- **Example:** `[1, 2, 3]`
+
+#### **What is a matrix?**
+A two-dimensional array of numbers.
+- **Example:** `[[1, 2, 3], [4, 5, 6]]`
+
+#### **What is a transpose?**
+Flipping a matrix over its diagonal, swapping rows and columns.
+- **Example:** Transpose of `[[1, 2], [3, 4]]` is `[[1, 3], [2, 4]]`.
+
+#### **What is the shape of a matrix?**
+A tuple indicating the number of rows and columns.
+- **Example:** Shape of `[[1, 2, 3], [4, 5, 6]]` is `(2, 3)`.
+
+#### **What is an axis?**
+A specific dimension for operations in a matrix. Axis 0 is rows, and axis 1 is columns.
+- **Example:** Sum along axis 0 of `[[1, 2], [3, 4]]` is `[4, 6]`.
+
+#### **What is a slice?**
+Selecting a subset of elements from an array or matrix.
+- **Example:** The first row of `[[1, 2, 3], [4, 5, 6]]` is `[1, 2, 3]`.
+
+#### **What are element-wise operations?**
+Operations applied individually to each element in vectors or matrices.
+- **Example:** Element-wise addition of `[1, 2]` and `[3, 4]` is `[4, 6]`.
+
+#### **How do you concatenate vectors/matrices?**
+Joining vectors/matrices end-to-end.
+- **Example:** Concatenating `[1, 2]` with `[3, 4]` gives `[1, 2, 3, 4]`.
+
+#### **What is the dot product?**
+Multiplying corresponding elements of vectors and summing the results.
+- **Example:** Dot product of `[1, 2]` and `[3, 4]` is `11`.
+
+#### **What is matrix multiplication?**
+Multiplying two matrices by taking the dot product of rows and columns.
+- **Example:** Multiplying `[[1, 2], [3, 4]]` with `[[2, 0], [1, 2]]` gives `[[4, 4], [10, 8]]`.
+
+#### **What is Numpy?**
+A Python library for numerical computing, supporting large, multi-dimensional arrays and matrices.
+- **Example:** Calculate mean using NumPy: `np.mean([1, 2, 3, 4])` is `2.5`.
+
+#### **What is parallelization?**
+Dividing a task into parts executed simultaneously on multiple processors to improve performance.
+- **Example:** Parallelizing matrix addition can significantly reduce computation time.
+
+#### **What is broadcasting?**
+Arithmetic operations on arrays of different shapes by "stretching" the smaller array.
+- **Example:** Adding `[1, 2, 3]` to `[[1], [2], [3]]` results in `[[2, 3, 4], [3, 4, 5], [4, 5, 6]]`.
+
+---
+| Task Number | Task Name                 | Brief Description                                                           |
+|-------------|---------------------------|-----------------------------------------------------------------------------|
+| 0           | Slice Me Up               | Slice `arr` to obtain specific segments.                                    |
+| 1           | Trim Me Down              | Extract the middle columns from a 2D matrix.                                |
+| 2           | Size Me Please            | Calculate and return the shape of a matrix.                                 |
+| 3           | Flip Me Over              | Return the transpose of a 2D matrix.                                        |
+| 4           | Line Up                   | Add two arrays element-wise and return a new list.                          |
+| 5           | Across The Planes         | Perform element-wise addition of two 2D matrices.                           |
+| 6           | Howdy Partner             | Concatenate two arrays into a new list.                                     |
+| 7           | Gettin’ Cozy              | Concatenate two matrices along a specified axis.                            |
+| 8           | Ridin’ Bareback           | Perform matrix multiplication on two 2D matrices.                           |
+| 9           | Let The Butcher Slice It  | Slice a matrix to obtain specified segments.                                |
+| 10          | I’ll Use My Scale         | Calculate the shape of a `numpy.ndarray`.                                   |
+| 11          | The Western Exchange      | Transpose a `numpy.ndarray`.                                                |
+| 12          | Bracing The Elements      | Perform element-wise operations on `mat1` and `mat2`.                       |
+| 13          | Cat's Got Your Tongue     | Concatenate two matrices along a specified axis using NumPy.                |
+| 14          | Saddle Up                 | Perform matrix multiplication using NumPy.                                  |
+
+
+---
+
 
 ##Tasks
 ### 0. Slice Me Up
@@ -42,9 +120,19 @@ print(matrix_shape(mat1))
 mat2 = [[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10], [11, 12, 13, 14, 15]],
         [[16, 17, 18, 19, 20], [21, 22, 23, 24, 25], [26, 27, 28, 29, 30]]]
 print(matrix_shape(mat2))
+#!/usr/bin/env python3
 
-You can assume all elements in the same dimension are of the same type/shape
-The shape should be returned as a list of integers
+import numpy as np
+np_slice = __import__('100-slice_like_a_ninja').np_slice
+
+mat1 = np.array([[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]])
+print(np_slice(mat1, axes={1: (1, 3)}))
+print(mat1)
+mat2 = np.array([[[1, 2, 3, 4, 5], [6, 7, 8, 9, 10]],
+                 [[11, 12, 13, 14, 15], [16, 17, 18, 19, 20]],
+                 [[21, 22, 23, 24, 25], [26, 27, 28, 29, 30]]])
+print(np_slice(mat2, axes={0: (2,), 2: (None, None, -2)}))
+print(mat2)list of integers
 
 ### 3. Flip Me Over
 Write a function def matrix_transpose(matrix): that returns the transpose of a 2D matrix, matrix:
@@ -149,3 +237,12 @@ You can assume that mat1 and mat2 are numpy.ndarrays
 You are not allowed to use any loops or conditional statements
 You may use: import numpy as np
 You can assume that mat1 and mat2 are never empty
+
+### 15. Slice Like A Ninja
+Write a function def np_slice(matrix, axes={}): that slices a matrix along specific axes:
+
+You can assume that matrix is a numpy.ndarray
+You must return a new numpy.ndarray
+axes is a dictionary where the key is an axis to slice along and the value is a tuple representing the slice to make along that axis
+You can assume that axes represents a valid slice
+Hint:https://docs.python.org/3/library/functions.html#slice

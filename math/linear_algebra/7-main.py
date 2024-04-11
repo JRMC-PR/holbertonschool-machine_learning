@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-cat_matrices2D = __import__('7-gettin_cozy').cat_matrices2D
+cat_matrices2D = __import__("7-gettin_cozy").cat_matrices2D
 
 mat1 = [[1, 2], [3, 4]]
 mat2 = [[5, 6]]

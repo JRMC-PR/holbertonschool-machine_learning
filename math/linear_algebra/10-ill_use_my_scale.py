@@ -1,12 +1,15 @@
 #!/usr/bin/env python3
-"""calculates a matrix shape """
+"""Module for calculating the shape of numpy arrays."""
 
 
-def np_shape(matix):
+def np_shape(matrix):
     """
-    calculates the shape of a matrix
+    Calculates the shape of a matrix.
 
-    Args:
-        matix (numpy.ndarray): matrix to calculate the shape of
+    Parameters:
+    - matrix (numpy.ndarray): The matrix to calculate the shape of.
+
+    Returns:
+    - tuple: A tuple of integers representing the shape (dimensions) of the matrix.
     """
-    return matix.shape
+    return matrix.shape
