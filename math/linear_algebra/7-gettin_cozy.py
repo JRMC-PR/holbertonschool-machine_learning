@@ -37,3 +37,4 @@ def cat_matrices2D(mat1, mat2, axis=0):
             CAT.append(mat1[i] + mat2[i])  # Combine and add rows side by side
 
     return CAT
+

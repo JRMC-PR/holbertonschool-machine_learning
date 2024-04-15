@@ -1,0 +1,33 @@
+Linear algebra is used in machine learning in different ways:
+Data representation: like for images
+Matrix operation: like in neural networks
+Matrix decomposition: like in PCA
+Eigenvectors and eigen values: like in PCA
+Singular value decomposition (SVD:)
+Optimization: like in gradient descent
+
+
+
+Scalars are what we call single numbers, like 3, 12.5, -9, 0, 1/2.
+Scalars are usually denoted by lowercase variable names. For example,
+ the following are scalars:
+x = 3, y = -2, z = 0, π = 3.14159, α = 0.5
+[1, 2, 3] is not a scalar, it is a vector.
+Vectors are arrays of a single line or a single column of numbers.
+
+In addition: vectors should be the same size and shape
+for subtraction: vectors should be the same size and shape
+for multiplication: Vectors must have the same number of elements (row times column =  a scalar) m x n  n x p  = m x p
+so if the number of columns of a and the number of columns of b should be the same
+
+dot product:
+
+outer product: if a and b are column vectors of any sie then aTb is the outer product of a and b
+=0de
+two uses for matrix :
+1. Storing
+
+
+Broadcasting:
+
+Here operation sare done on pair of arrays with the same shape  element wise

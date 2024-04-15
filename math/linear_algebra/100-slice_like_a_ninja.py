@@ -1,8 +1,6 @@
 #!/usr/bin/env python3
 """slicing module for numpy arrays
     """
-import numpy as np
-
 
 def np_slice(matrix, axes={}):
     """

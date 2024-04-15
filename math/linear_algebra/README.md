@@ -28,8 +28,7 @@ A specific dimension for operations in a matrix. Axis 0 is rows, and axis 1 is c
 Selecting a subset of elements from an array or matrix.
 - **Example:** The first row of `[[1, 2, 3], [4, 5, 6]]` is `[1, 2, 3]`.
 
-#### **What are element-wise operations?**
-Operations applied individually to each element in vectors or matrices.
+#### **What are element-wise operations?*Operations are applied individually to each element in vectors or matrices.
 - **Example:** Element-wise addition of `[1, 2]` and `[3, 4]` is `[4, 6]`.
 
 #### **How do you concatenate vectors/matrices?**
@@ -75,6 +74,85 @@ Arithmetic operations on arrays of different shapes by "stretching" the smaller 
 | 13          | Cat's Got Your Tongue     | Concatenate two matrices along a specified axis using NumPy.                |
 | 14          | Saddle Up                 | Perform matrix multiplication using NumPy.                                  |
 
+---
+## NumPy `ndarray` Attributes
+
+`numpy.ndarray` objects are equipped with a variety of attributes that provide essential information about the array's structure and behavior:
+
+### Array Dimensions
+
+- **`ndim`**: The number of dimensions or axes of the array.
+- **`shape`**: A tuple representing the array's dimensions, showing the size of the array in each dimension.
+- **`size`**: The total number of elements in the array.
+
+### Data Type and Memory
+
+- **`dtype`**: Describes the type of the elements in the array.
+- **`itemsize`**: The size in bytes of each element in the array.
+- **`data`**: The buffer containing the actual elements of the array, typically not used directly.
+- **`nbytes`**: The total number of bytes required to store the array.
+- **`base`**: The base object if the memory is shared; `None` if the array owns its memory.
+
+### Memory Layout and Other Properties
+
+- **`flags`**: Information about the memory layout and other characteristics of the array:
+  - `C_CONTIGUOUS (C)`: Data is in a single, C-style contiguous segment.
+  - `F_CONTIGUOUS (F)`: Data is in a single, Fortran-style contiguous segment.
+  - `OWNDATA (O)`: The array owns its memory.
+  - `WRITEABLE (W)`: Data can be written to; false locks the data.
+  - `ALIGNED (A)`: Data and elements are appropriately aligned.
+  - `UPDATEIFCOPY (U)`: This array is a copy that will update the original array upon deletion.
+
+### Mathematical Properties
+
+- **`T`**: Provides the transposed version of the array.
+- **`real`**: The real part of the array if the elements are complex.
+- **`imag`**: The imaginary part of the array if the elements are complex.
+
+### Strides
+
+- **`strides`**: A tuple of bytes to step in each dimension when traversing the array.
+
+These attributes are crucial for managing and understanding the behavior of `numpy.ndarray` objects in data analysis and scientific computing.
+
+---
+## NumPy `ndarray` Methods
+
+| Method        | Description                                              |
+|---------------|----------------------------------------------------------|
+| `reshape`     | Returns an array containing the same data with a new shape. |
+| `resize`      | Alters the size and shape of an array in-place.           |
+| `transpose`   | Permutes the dimensions of an array.                      |
+| `flatten`     | Collapses the array into one dimension.                   |
+| `ravel`       | Returns a flattened one-dimensional array.                |
+| `squeeze`     | Removes single-dimensional entries from the shape.        |
+| `swapaxes`    | Interchanges two axes of an array.                        |
+| `sort`        | Sorts an array.                                           |
+| `clip`        | Limits the values in an array.                            |
+| `sum`         | Sums all elements in the array.                           |
+| `prod`        | Multiplies all elements in the array.                     |
+| `mean`        | Calculates the mean of elements along an axis.            |
+| `max`         | Returns the maximum value along a given axis.             |
+| `min`         | Returns the minimum value along a given axis.             |
+| `cumsum`      | Cumulative sum of array elements.                         |
+| `cumprod`     | Cumulative product of array elements.                     |
+| `std`         | Computes the standard deviation along an axis.            |
+| `var`         | Computes the variance along an axis.                      |
+| `all`         | Checks if all elements are True.                          |
+| `any`         | Checks if any element is True.                            |
+| `argmax`      | Returns indices of the max elements.                      |
+| `argmin`      | Returns indices of the min elements.                      |
+| `argsort`     | Indices that would sort the array.                        |
+| `nonzero`     | Returns indices of non-zero elements.                     |
+| `searchsorted`| Finds indices where elements should be inserted.          |
+| `copy`        | Returns a copy of the array.                              |
+| `fill`        | Fills the array with a scalar value.                      |
+| `tolist`      | Converts the array to a (nested) list.                    |
+| `diagonal`    | Extracts the diagonal elements.                           |
+
+ndim: get dimentions , .shape: get the shape
+
+Each of these methods can significantly enhance data manipulation and analysis tasks within a scientific computing or data analysis context. For further details, refer to the [official NumPy documentation](https://numpy.org/doc/stable/reference/arrays.ndarray.html).
 
 ---
 
@@ -246,3 +324,7 @@ You must return a new numpy.ndarray
 axes is a dictionary where the key is an axis to slice along and the value is a tuple representing the slice to make along that axis
 You can assume that axes represents a valid slice
 Hint:https://docs.python.org/3/library/functions.html#slice
+
+
+
+12- 2 Dilan SQl bsisc
