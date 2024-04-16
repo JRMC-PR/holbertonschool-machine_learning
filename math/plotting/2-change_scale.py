@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """
-This module contains a function to generate a line graph representing the exponential decay of C-14.
+This module contains a function to generate a line
+graph representing the exponential decay of C-14.
 
 The x-axis represents time in years and ranges from 0 to 28650.
 The y-axis represents the fraction remaining and is logarithmically scaled.
@@ -12,7 +13,8 @@ import matplotlib.pyplot as plt
 
 def change_scale():
     """
-    This function generates a line graph representing the exponential decay of C-14.
+    This function generates a line graph representing
+    the exponential decay of C-14.
 
     The x-axis represents time in years and ranges from 0 to 28650.
     The y-axis represents the fraction remaining and is logarithmically scaled.
