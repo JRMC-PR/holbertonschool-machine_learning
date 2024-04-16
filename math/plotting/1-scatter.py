@@ -1,9 +1,9 @@
 #!/usr/bin/env python3
 """
 Scatter plot module
-This module contains a function to generate a scatter plot of men's height vs weight.
+This module contains a function to generate a
+scatter plot of men's height vs weight.
 """
-
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -11,12 +11,15 @@ import matplotlib.pyplot as plt
 def scatter():
     """
     Scatter plot function
-    This function generates a scatter plot of men's height vs weight.
-    The height and weight data are generated using a multivariate normal distribution.
+    This function generates a scatter plot of men's
+    height vs weight.
+    The height and weight data are generated using
+    a multivariate normal distribution.
     The scatter plot is displayed with magenta markers.
     """
 
-    # Define the mean and covariance for the multivariate normal distribution
+    # Define the mean and covariance for
+    # the multivariate normal distribution
     mean = [69, 0]
     cov = [[15, 8], [8, 15]]
 
