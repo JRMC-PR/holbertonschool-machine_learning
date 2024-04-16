@@ -43,6 +43,3 @@ def change_scale():
     plt.title("Exponential Decay of C-14")
     # Display the plot
     plt.show()
-
-# Call the function to create the plot
-change_scale()
