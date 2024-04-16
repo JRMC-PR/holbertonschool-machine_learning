@@ -31,8 +31,8 @@ def bars():
     names = ['Farrah', 'Fred', 'Felicia']
 
     # Set the names of the fruits and their corresponding colors
-    fruits = [('apple', 'red'), ('banana', 'yellow'),
-              ('orange', '#ff8000'), ('peach', '#ffe5b4')]
+    fruits = [('apples', 'red'), ('bananas', 'yellow'),
+              ('oranges', '#ff8000'), ('peaches', '#ffe5b4')]
 
     # Initialize the bottom of the bars (needed for stacking the bars)
     bottom = np.zeros(len(names))
