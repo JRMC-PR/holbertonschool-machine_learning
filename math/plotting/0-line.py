@@ -13,5 +13,3 @@ def line():
     plt.xlim([0, 10])  # Set the x-axis range from 0 to 10
 
     plt.show()  # Display the plot
-
-line()  # Call the function to create the plot
