@@ -38,6 +38,8 @@ def frequency():
     # Create a histogram of the student grades, with
     # bins every 10 units from 0 to 100, and black edges on the bars
     plt.hist(student_grades, bins=range(0, 101, 10), edgecolor='black')
+    # Add a ticks on the x-axis at every 10 units
+    plt.xticks(range(0, 101, 10))
     # Set the x-axis range from 0 to 100
     plt.xlim(0, 100)
     # Set the y-axis range from 0 to 30
