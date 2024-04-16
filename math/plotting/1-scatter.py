@@ -38,7 +38,7 @@ def scatter():
     plt.title("Men's Height vs Weight")
 
     # Create the scatter plot with magenta markers
-    plt.scatter(x, y, s=100, c="magenta", marker="o")
+    plt.scatter(x, y, c="magenta")
 
     # Display the plot
     plt.show()
