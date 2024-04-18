@@ -1,0 +1,19 @@
+Exploratory data analysis: is a task of analyzing data using simple tools from statistics and visuallization
+
+Steps or machine learning
+!- Problem understanding
+2- Dataa preparation/exploration
+3- Modeling
+4- evaluatioon
+4-deployment
+
+anomalies - data that is opposite to what we were expecting
+data visualization: is an important component because it allows
+                    to look at the data and get to know the variables  and relationships between them
+
+Univariate analysis
+Bivariate analysis
+Multivariate analysis
+
+Histograms are use for continues values
+and bar are for categorical

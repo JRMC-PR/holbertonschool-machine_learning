@@ -42,16 +42,17 @@ def all_in_one():
 
     # Create a figure
     fig = plt.figure(figsize=(5, 5))
-    fig.suptitle('All in One', fontsize='x-small')
+    fig.suptitle('All in One')
 
     # Plot 1: y = x^3
     plt.subplot(3, 2, 1)
     plt.plot(y0, 'r')
     plt.xticks(range(0, 11, 2))
     plt.yticks(range(0, 1100, 500))
+    plt.xlim(0, 10)
 
     # Plot 2: Men's Height vs Weight
-    plt.subplot(3, 2, 2)
+    plt.subplot(322)
     plt.scatter(x1, y1, c='magenta')
     plt.xlabel('Height (in)', fontsize='x-small')
     plt.ylabel('Weight (lbs)', fontsize='x-small')
@@ -62,18 +63,21 @@ def all_in_one():
     plt.plot(x2, y2)
     plt.yscale('log')
     plt.xticks(range(0, 30000, 10000))
+    plt.xlim(0, 28650)
     plt.xlabel('Time (years)', fontsize='x-small')
     plt.ylabel('Fraction Remaining', fontsize='x-small')
     plt.title('Exponential Decay of C-14', fontsize='x-small')
 
     # Plot 4: Exponential Decay of Radioactive Elements
-    plt.subplot(3, 2, 4)
+    plt.subplot(324)
     plt.plot(x3, y31, 'r--', label='C-14')
     plt.plot(x3, y32, 'g-', label='Ra-226')
     plt.xticks(np.arange(0, 21000, step=5000))
-    plt.yticks(np.arange(0, 1.2, step=0.5))
     plt.xlabel('Time (years)', fontsize='x-small')
+    plt.xlim(0, 20000)
+    plt.yticks(np.arange(0, 1.2, step=0.5))
     plt.ylabel('Fraction Remaining', fontsize='x-small')
+    plt.ylim(0, 1)
     plt.title('Exponential Decay of Radioactive Elements', fontsize='x-small')
     plt.legend(fontsize='x-small')
 
@@ -81,6 +85,7 @@ def all_in_one():
     plt.subplot(3, 2, (5, 6))
     plt.hist(student_grades, bins=range(0, 101, 10), edgecolor='black')
     plt.xticks(range(0, 101, 10))
+    plt.yticks(range(0, 31, 10))
     plt.xlabel('Grades', fontsize='x-small')
     plt.ylabel('Number of Students', fontsize='x-small')
     plt.title('Project A', fontsize='x-small')
