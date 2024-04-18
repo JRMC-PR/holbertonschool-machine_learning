@@ -4,12 +4,13 @@ squares of the first n natural numbers"""
 
 
 def summation_i_squared(n):
-        """This function calculates the sum of the
-        squares of the first n natural numbers"""
-        if isinstance(n, (int, float)) and n < 1:
-                return None
+    """This function calculates the sum of the squares"""
+    # Step 1: Validate the input
+    if not isinstance(n, int) or n < 0:
+        return None  # Return None if n is not a valid number
 
-        if n == 1:
-                return 1
+    # Step 2: Apply the formula to calculate the sum of squares
+    sum_squares = (n * (n + 1) * (2 * n + 1)) // 6
 
-        return n ** 2 + summation_i_squared(n - 1)
+    # Step 3: Return the result
+    return sum_squares
