@@ -6,7 +6,7 @@ squares of the first n natural numbers"""
 def summation_i_squared(n):
     """This function calculates the sum of the squares"""
     # Step 1: Validate the input
-    if not isinstance(n, int) or n < 0:
+    if not isinstance(n, int) or n <= 0:
         return None  # Return None if n is not a valid number
 
     # Step 2: Apply the formula to calculate the sum of squares
