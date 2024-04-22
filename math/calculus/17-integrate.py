@@ -34,7 +34,7 @@ def poly_integral(poly, C=0):
         # Divide the coefficient by its index + 1 (which is the
         # power of x after integration),
         # and round to 2 decimal places
-        coef = round(poly[i] / (i + 1), 2)
+        coef = poly[i] / (i + 1)
 
         # If the coefficient is a whole number, represent it as an integer
         if coef.is_integer():
