@@ -44,7 +44,7 @@ def poly_integral(poly, C=0):
         integral.append(coef)
 
     # Remove trailing zeros
-    while integral[-1] == 0:
+    while integral and integral[-1] == 0:
         integral.pop()
 
     return integral
