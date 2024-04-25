@@ -1,0 +1,49 @@
+Machine learning- provides the system with the ability to automatically learn and improve the experience
+
+Patter Recognition
+Facial identities or facial expressions
+Handwritten or spoken words
+Medical images
+Sensor Data/ IoT( internet of things)
+
+Anomaly Detection
+Unusual sounds, sequences, patterns, etc.
+
+
+Optimization: Many parameters have " hidden"  relationships that can be the basis of optimization
+
+Pattern Generation
+
+each column of the data set that we get is called a feature
+
+
+What is learning: a procedure that consists of estimating the model parameters so that the
+learned model ( algorithm) can perform a specific task
+In artificial NEURAL Networks, these parameters are the weight matrix (w's)
+y = ax + b  a and b are the parameters to learn
+
+Given
+-a dataset D,
+- a task T, and
+ - a performance measure M
+
+ A computer system is sad to learn from D to perform task T if after  learning the system
+ performance on T improves as measured by M
+
+Data: Loan application Data
+Task: Predict wheter a loan should be approved or not
+Preformance measure: accuracy
+
+No learning : clasify all future application ( test data)to the majority class (i.e., Yes)
+ Accuracy 60%= 9/15 = 60%
+
+
+ Types of learning
+
+ Supervises  Learning: Data and corresponding lables are Given
+ Unsupervised learning:  Only data is given ,no lables proivided
+
+
+
+
+
