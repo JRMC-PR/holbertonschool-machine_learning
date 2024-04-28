@@ -80,16 +80,32 @@ class Node:
         lines = text.split("\n")
         new_text = "    +--" + lines[0] + "\n"
         for x in lines[1:]:
-            new_text += "       " + x + "\n"
+            new_text += "    |  " + x + "\n"
         return new_text
 
     def __str__(self):
         """
-        Return a string representation of the node and its children.
+        Method that returns the string representation of the current node
         """
-        left_str = self.left_child_add_prefix(self.left_child.__str__())
-        right_str = self.right_child_add_prefix(self.right_child.__str__())
-        return left_str + right_str
+        # String representation for the current node
+        node_str = (
+            f"root [feature={self.feature}, threshold={self.threshold}]\n"
+            if self.is_root else
+            f"-> node [feature={self.feature}, "
+            f"threshold={self.threshold}]\n"
+        )
+
+        # If the node is a leaf, simply return the string representation
+        if self.is_leaf:
+            return node_str
+
+        # Formatting for the left and right children
+        left_str = self.left_child_add_prefix(
+            self.left_child.__str__()) if self.left_child else ""
+        right_str = self.right_child_add_prefix(
+            self.right_child.__str__()) if self.right_child else ""
+
+        return node_str + left_str + right_str
 
 
 class Leaf(Node):
