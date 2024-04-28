@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 
-Decision_Tree = __import__('7-build_decision_tree').Decision_Tree
+Decision_Tree = __import__('8-build_decision_tree').Decision_Tree
 import numpy as np
 import matplotlib.pyplot as plt
 
@@ -76,6 +76,7 @@ def visualize_model_2D(model, cmap=plt.cm.Set1):
 
 #Main 2
 explanatory,target = circle_of_clouds(10,30)
-T=Decision_Tree(split_criterion="random")
+T=Decision_Tree(split_criterion="Gini")
 T.fit(explanatory,target,verbose=0)
+
 visualize_model_2D(T)
