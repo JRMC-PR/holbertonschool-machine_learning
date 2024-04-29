@@ -1,59 +1,65 @@
 #!/usr/bin/env python3
 """
-Module implementing Isolation_Random_Forest for outlier detection using
-Isolation Trees.
-Designed for high-dimensional datasets, it identifies anomalies based on
-data splits by feature selection.
+Module implementing Isolation Random Forest for outlier detection using
+Isolation Trees. Designed for high-dimensional datasets, it identifies
+anomalies based on data splits by feature selection.
 """
 import numpy as np
+from concurrent.futures import ThreadPoolExecutor
 Isolation_Random_Tree = __import__('10-isolation_tree').Isolation_Random_Tree
 
 
-class Isolation_Random_Forest():
-    """ This class defines an Isolation Random Forest. """
+class Isolation_Random_Forest:
+    """ Defines an Isolation Random Forest. """
 
     def __init__(self, n_trees=100, max_depth=10, min_pop=1, seed=0):
         """ Initializes the Isolation Random Forest. """
-        self.numpy_predicts = []
-        self.target = None
-        self.numpy_preds = None
         self.n_trees = n_trees
         self.max_depth = max_depth
         self.seed = seed
+        self.numpy_preds = []
 
-    def predict(self, explanatory):
-        """ Makes predictions for a given set of examples. """
-        predictions = np.array([f(explanatory) for f in self.numpy_preds])
-        return predictions.mean(axis=0)
+    def _fit_tree(self, seed, explanatory):
+        """ Helper method to fit a single tree. """
+        tree = Isolation_Random_Tree(max_depth=self.max_depth, seed=seed)
+        tree.fit(explanatory)
+        return (tree.predict, tree.depth(), tree.count_nodes(),
+                tree.count_nodes(only_leaves=True))
 
     def fit(self, explanatory, n_trees=100, verbose=0):
-        """ Fits the model to the training data. """
+        """ Fits model to training data using parallel processing. """
         self.explanatory = explanatory
         self.numpy_preds = []
         depths = []
         nodes = []
         leaves = []
-        for i in range(n_trees):
-            T = Isolation_Random_Tree(max_depth=self.max_depth,
-                                      seed=self.seed + i)
-            T.fit(explanatory)
-            self.numpy_preds.append(T.predict)
-            depths.append(T.depth())
-            nodes.append(T.count_nodes())
-            leaves.append(T.count_nodes(only_leaves=True))
+
+        with ThreadPoolExecutor() as executor:
+            results = list(executor.map(
+                lambda i: self._fit_tree(self.seed + i, explanatory),
+                range(n_trees)))
+
+        for result in results:
+            self.numpy_preds.append(result[0])
+            depths.append(result[1])
+            nodes.append(result[2])
+            leaves.append(result[3])
+
         if verbose == 1:
-            print(f"""  Training finished.
-    - Mean depth                     : {np.array(depths).mean()}
-    - Mean number of nodes           : {np.array(nodes).mean()}
-    - Mean number of leaves          : {np.array(leaves).mean()}""")
+            print(f"Training finished.\n"
+                  f"  - Mean depth: {np.mean(depths)}\n"
+                  f"  - Mean number of nodes: {np.mean(nodes)}\n"
+                  f"  - Mean number of leaves: {np.mean(leaves)}")
+
+    def predict(self, explanatory):
+        """ Makes predictions for a given set of examples. """
+        predictions = np.array([f(explanatory) for f in self.numpy_preds])
+        return np.mean(predictions, axis=0)
 
     def suspects(self, explanatory, n_suspects):
-        """ Returns the top n_suspects with the smallest depths. """
-        # Calculate the mean depth for each data point using predict method
+        """ Returns top n suspects with the smallest depths. """
         depths = self.predict(explanatory)
-        # Get the indices that would sort the depths array in ascending order
         sorted_indices = np.argsort(depths)
-        # Select the top n suspects with the smallest depths
         suspect_data = explanatory[sorted_indices[:n_suspects]]
         suspect_depths = depths[sorted_indices[:n_suspects]]
         return suspect_data, suspect_depths
