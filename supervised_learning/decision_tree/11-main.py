@@ -55,13 +55,15 @@ def visualize_bassins(ax, model, x_min, x_max, y_min, y_max,cmap) :
 
 
 def visualize_training_dataset_2D(ax, model, cmap):
-    """ color the points of the 'explanatory' array
-    with the color corresponding to the class stored in 'target' """
-    ax.scatter(model.explanatory[:, 0], model.explanatory[:, 1], c=model.target, cmap=cmap)
+    """ Color the points of the 'explanatory' array based on the depths calculated by the model. """
+    # Get the mean depths for each point from the Isolation Forest
+    depths = model.predict(model.explanatory)
+    # Scatter plot using depths to color the points
+    ax.scatter(model.explanatory[:, 0], model.explanatory[:, 1], c=depths, cmap=cmap)
 
 
-def visualize_model_2D(model, cmap=plt.cm.Set1):
-    """ gather the results of visualize_bassins and visualize_training_dataset_2D """
+def visualize_model_2D(model, cmap=plt.cm.RdBu):
+    """ Gather the results of visualize_bassins and visualize_training_dataset_2D """
     assert model.explanatory.shape[1] == 2, "Not a 2D example"
 
     x_min, x_max = np_extrema(model.explanatory[:, 0])
@@ -83,4 +85,4 @@ suspects,depths = IRF.suspects(explanatory,n_suspects=3)
 print("suspects :",suspects)
 print("depths of suspects :",depths)
 #Visualization
-visualize_model_2D(IRF,cmap=plt.cm.PuRd)
+visualize_model_2D(IRF, cmap=plt.cm.RdBu)
