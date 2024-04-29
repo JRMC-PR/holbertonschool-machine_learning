@@ -45,11 +45,11 @@ class Isolation_Random_Forest:
             nodes.append(result[2])
             leaves.append(result[3])
 
-        if verbose == 1:
-            print(f"Training finished.\n"
-                  f"  - Mean depth: {np.mean(depths)}\n"
-                  f"  - Mean number of nodes: {np.mean(nodes)}\n"
-                  f"  - Mean number of leaves: {np.mean(leaves)}")
+        if verbose==1 :
+                print(f"""  Training finished.
+        - Mean depth                     : { np.array(depths).mean()      }
+        - Mean number of nodes           : { np.array(nodes).mean()       }
+        - Mean number of leaves          : { np.array(leaves).mean()      }""")
 
     def predict(self, explanatory):
         """ Makes predictions for a given set of examples. """
