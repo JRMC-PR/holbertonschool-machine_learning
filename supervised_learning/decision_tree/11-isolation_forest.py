@@ -94,22 +94,8 @@ class Isolation_Random_Forest():
     - Mean number of leaves          : { np.array(leaves).mean()      }""")
 
     def suspects(self, explanatory, n_suspects):
-        """
-        Identifies the top n suspects with the lowest mean depth in the
-        Isolation Forest, suggesting they are potential outliers.
-
-        Args:
-            explanatory (numpy.ndarray): The explanatory variables of the
-            dataset.
-            n_suspects (int): The number of suspect data points to return.
-
-        Returns:
-            tuple: Two numpy arrays; the first contains the suspect data
-            points,
-                the second contains the corresponding depths indicating
-                their isolation levels.
-        """
+        """ returns the n_suspects rows in explanatory
+        that have the smallest mean depth """
         depths = self.predict(explanatory)
-        sorted_indices = np.argsort(depths)
-        return explanatory[sorted_indices[:n_suspects]], \
-            depths[sorted_indices[:n_suspects]]
+        smallest_depth_indices = np.argsort(depths)[:n_suspects]
+        return explanatory[smallest_depth_indices], depths[smallest_depth_indices]
