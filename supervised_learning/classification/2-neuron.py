@@ -27,6 +27,9 @@ class Neuron:
     def W(self):
         """
         Getter for the weights vector
+
+        Returns:
+            __W: Contains the weights
         """
         return self.__W
 
@@ -34,6 +37,9 @@ class Neuron:
     def b(self):
         """
         Getter for the bias
+
+        Returns:
+            __b: Contains the bias
         """
         return self.__b
 
@@ -41,11 +47,21 @@ class Neuron:
     def A(self):
         """
         Getter for the activated output
+
+        Returns:
+            __A: Contains the activated output
         """
         return self.__A
 
     def forward_prop(self, X):
-        """Calculates the forward propaagation of neurons"""
+        """
+        This function calculates the forward propagation of the neuron
+        Args:
+            X (numpy.ndarray): contains inpu8t data_
+
+        Returns:
+            __A: Contains the activated output
+        """        """"""
         # Compute the wheighhted sum of the input values
         w_sum = np.matmul(self.__W, X) + self.__b
         # Sigmoid activation function
