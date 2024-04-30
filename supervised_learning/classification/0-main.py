@@ -9,7 +9,7 @@ X_3D, Y = lib_train['X'], lib_train['Y']
 X = X_3D.reshape((X_3D.shape[0], -1)).T
 
 np.random.seed(0)
-neuron = Neuron()
+neuron = Neuron(X.shape[0])
 print(neuron.W)
 print(neuron.W.shape)
 print(neuron.b)
