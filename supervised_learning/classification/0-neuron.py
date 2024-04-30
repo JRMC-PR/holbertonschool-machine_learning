@@ -5,7 +5,7 @@ import numpy as np
 
 class Neuron:
     """This class defines a single neuron performing binary classification"""
-    def __int__(self, nx):
+    def __init__(self, nx):
         """This function initializes the Neuron instance"""
         if isinstance(nx, int) is False:
             raise TypeError("nx must be an integer")
