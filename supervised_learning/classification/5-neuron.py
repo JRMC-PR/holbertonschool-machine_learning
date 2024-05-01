@@ -113,7 +113,7 @@ class Neuron:
             A (numpy.ndarray): containing the activated output of the neuron
             alpha (float): learning rate
         """
-        #get numberof examples in X
+        # get numberof examples in X
         m = Y.shape[1]
         # Calculate the gradient
         dz = A - Y
@@ -121,6 +121,6 @@ class Neuron:
         dw = np.matmul(X, dz.T) / m
         # Derivative of the bias
         db = np.sum(dz) / m
-        #set the new weights and bias
+        # set the new weights and bias
         self.__W = self.__W - alpha * dw.T
         self.__b = self.__b - alpha * db
