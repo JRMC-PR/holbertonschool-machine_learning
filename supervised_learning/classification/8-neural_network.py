@@ -14,12 +14,12 @@ class NeuralNetwork:
                 nx: number of input features
                 nodes: number of nodes found in the hidden layer
             Attributes:
-                W1: weights vector for the hidden layer
-                b1: bias for the hidden layer
-                A1: activated output for the hidden layer
-                W2: weights vector for the output neuron
-                b2: bias for the output neuron
-                A2: activated output for the output neuron
+                W1: weights vector of the hidden layer
+                b1: bias of the hidden layer
+                A1: activated output of the hidden layer
+                W2: weights vector of the output neuron
+                b2: bias of the output neuron
+                A2: activated output of the output neuron
         """
         if isinstance(nx, int) is False:
             raise TypeError("nx must be an integer")
