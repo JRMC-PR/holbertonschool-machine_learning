@@ -32,7 +32,7 @@ class NeuralNetwork:
         # Initialize weights and biases
         self.W1 = np.random.randn(nodes, nx)  # Weights of the hidden layer
         self.b1 = np.zeros((nodes, 1))  # Bias of the hidden layer
-        self.A1 = 0  # Activated output for the hidden layer
+        self.A1 = 0  # Activated output of the hidden layer
         self.W2 = np.random.randn(1, nodes)  # Weights of the output neuron
         self.b2 = 0  # Bias of the output neuron
         self.A2 = 0  # Activated output of the output neuron
