@@ -1,6 +1,7 @@
 #!/usr/bin/env python3
 """ This module defines a newrual network
     class for binary classification"""
+from matplotlib import pyplot as plt
 import numpy as np
 
 
@@ -144,28 +145,35 @@ class NeuralNetwork:
         self.__W1 = self.__W1 - alpha * dW1.T
         self.__b1 = self.__b1 - alpha * db1
 
-    def train(self, X, Y, iterations=5000, alpha=0.5):
-        """ This method trains the neural network
-            Args:
-                X: input data
-                Y: correct labels
-                iterations: number of iterations to train over
-                alpha: learning rate
-            Returns:
-                The evaluation of the training data after
-                iterations of training have occurred
-        """
-        if isinstance(iterations, int) is False:
+    def train(self, X, Y, iterations=5000, alpha=0.05, verbose=True,
+              graph=True, step=100):
+        if type(iterations) is not int:
             raise TypeError("iterations must be an integer")
-        if iterations < 1:
+        if iterations <= 0:
             raise ValueError("iterations must be a positive integer")
-        if isinstance(alpha, float) is False:
+        if type(alpha) is not float:
             raise TypeError("alpha must be a float")
         if alpha <= 0:
             raise ValueError("alpha must be positive")
+        if type(step) is not int:
+            raise TypeError("step must be an integer")
+        if step <= 0 or step > iterations:
+            raise ValueError("step must be positive and <= iterations")
+
+        costs = []
         for i in range(iterations):
-            # Perform forward propagation
             self.forward_prop(X)
-            # Perform backpropagation
             self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
+            if verbose and i % step == 0:
+                cost = self.cost(Y, self.__A2)
+                print("Cost after {} iterations: {}".format(i, cost))
+                costs.append(cost)
+
+        if graph:
+            plt.plot(np.arange(0, iterations, step), costs)
+            plt.title("Training Cost")
+            plt.xlabel("iteration")
+            plt.ylabel("cost")
+            plt.show()
+
         return self.evaluate(X, Y)
