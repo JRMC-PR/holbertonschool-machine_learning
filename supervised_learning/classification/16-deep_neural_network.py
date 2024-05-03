@@ -49,11 +49,11 @@ class DeepNeuralNetwork:
             if i == 0:
                 self.weights['W' + str(i + 1)] = \
                     np.random.randn(layers[i], nx) * np.sqrt(2/nx)
-            # For subsequent layers, the weights are based on the number
+            # Fr subsequent layers, the weights are based on the number
             # of nodes in the previous layer
             else:
                 self.weights['W' + str(i + 1)] = \
                     np.random.randn(layers[i], layers[i - 1]) * \
                     np.sqrt(2/layers[i - 1])
-            # Initialize biases to 0's for each layer
+            # Initialize biases to 0's fr each layer
             self.weights['b' + str(i + 1)] = np.zeros((layers[i], 1))
