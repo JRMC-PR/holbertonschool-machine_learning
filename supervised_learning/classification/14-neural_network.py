@@ -77,10 +77,10 @@ class NeuralNetwork:
                 activated output of the output neuron
         """
         # Calculate the hidden layer
-        Z1 = np.matmul(self.W1, X) + self.b1
+        Z1 = np.matmul(self.__W1, X) + self.__b1
         self.__A1 = 1 / (1 + np.exp(-Z1))
         # Calculate the output neuron
-        Z2 = np.matmul(self.W2, self.A1) + self.b2
+        Z2 = np.matmul(self.__W2, self.__A1) + self.__b2
         self.__A2 = 1 / (1 + np.exp(-Z2))
         return self.__A1, self.__A2
 
@@ -127,24 +127,22 @@ class NeuralNetwork:
                 A2: activated output of the output neuron
                 alpha: learning rate
         """
-        # number of examoles in the input data
+        # number of examples in the input data
         m = Y.shape[1]
         # Calculate the gradient of the output neuron
         dz2 = A2 - Y
-        dw2 = 1 / m * np.matmul(dz2, A1.T)
-        db2 = 1 / m * np.sum(dz2, axis=1, keepdims=True)
+        dW2 = np.matmul(A1, dz2.T) / m
+        db2 = np.sum(dz2, axis=1, keepdims=True) / m
         # Calculate the gradient of the hidden layer
-        dz1 = np.matmul(self.W2.T, dz2) * A1 * (1 - A1)
-        dw1 = 1 / m * np.matmul(dz1, X.T)
-        db1 = 1 / m * np.sum(dz1, axis=1, keepdims=True)
-        # Update the weights and biases
-        # of the output neuron
-        self.__W2 = self.W2 - alpha * dw2
-        self.__b2 = self.b2 - alpha * db2
-        # Update the weights and biases
-        # of the hidden layer
-        self.__W1 = self.W1 - alpha * dw1
-        self.__b1 = self.b1 - alpha * db1
+        dz1 = np.matmul(self.__W2.T, dz2) * A1 * (1 - A1)
+        dW1 = np.matmul(X, dz1.T) / m
+        db1 = np.sum(dz1, axis=1, keepdims=True) / m
+        # Update the weights and biases of the output neuron
+        self.__W2 = self.__W2 - alpha * dW2.T
+        self.__b2 = self.__b2 - alpha * db2
+        # Update the weights and biases of the hidden layer
+        self.__W1 = self.__W1 - alpha * dW1.T
+        self.__b1 = self.__b1 - alpha * db1
 
     def train(self, X, Y, iterations=5000, alpha=0.5):
         """ This method trains the neural network
@@ -169,5 +167,5 @@ class NeuralNetwork:
             # Perform forward propagation
             self.forward_prop(X)
             # Perform backpropagation
-            self.gradient_descent(X, Y, self.A1, self.A2, alpha)
+            self.gradient_descent(X, Y, self.__A1, self.__A2, alpha)
         return self.evaluate(X, Y)
