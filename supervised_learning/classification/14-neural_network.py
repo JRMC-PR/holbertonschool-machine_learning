@@ -144,7 +144,7 @@ class NeuralNetwork:
         self.__W1 = self.__W1 - alpha * dW1.T
         self.__b1 = self.__b1 - alpha * db1
 
-    def train(self, X, Y, iterations=5000, alpha=0.5):
+    def train(self, X, Y, iterations=5000, alpha=0.05):
         """ This method trains the neural network
             Args:
                 X: input data
