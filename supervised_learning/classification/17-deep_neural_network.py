@@ -72,4 +72,3 @@ class DeepNeuralNetwork:
     def weights(self):
         """ This method retrieves the weights and biases"""
         return self.__weights
-
