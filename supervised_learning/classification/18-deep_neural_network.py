@@ -85,7 +85,7 @@ class DeepNeuralNetwork:
         self.cache['A0'] = X
         # Loop over all layers
         for i in range(self.__L):
-            # Calculate the net input for the current layer
+            # Calculate the net input fr the current layer
             W_key = 'W' + str(i + 1)
             b_key = 'b' + str(i + 1)
             A_key = 'A' + str(i)
