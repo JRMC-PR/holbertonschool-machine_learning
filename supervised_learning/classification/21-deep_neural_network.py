@@ -152,7 +152,7 @@ class DeepNeuralNetwork:
             # Get the cached activations
             A_prev = cache['A' + str(i - 1)]
             # Calculate the derivatives of the weights and biases
-            dW = np.dot(dZ, A_prev.T) / m.
+            dW = np.dot(dZ, A_prev.T) / m
             db = np.sum(dZ, axis=1, keepdims=True) / m
             # Calculate the derivative of the cost
             # with respect to the activation
