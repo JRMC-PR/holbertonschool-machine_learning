@@ -15,6 +15,8 @@ def one_hot_decode(one_hot):
     # Check if one_hot is a numpy array
     if not isinstance(one_hot, np.ndarray):
         return None
+    if len(one_hot.shape) != 2:
+        return None
     try:
         # Use argmax to find the indices of the maximum values (1s)
         # along the axis representing the classes
