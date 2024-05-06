@@ -225,3 +225,35 @@ class DeepNeuralNetwork:
 
         # Return the evaluation of the training data
         return self.evaluate(X, Y)
+
+    def save(self, filename):
+        """
+        Saves the instance object to a file in pickle format.
+
+        Args:
+            filename: is the file to which the object should be saved.
+            If filename does not have the extension .pkl, add it.
+        """
+        # Check if filename ends with '.pkl', if not add it
+        if not filename.endswith('.pkl'):
+            filename += '.pkl'
+
+        # Open the file in write-binary mode and dump the object
+        with open(filename, 'wb') as file:
+            pickle.dump(self, file)
+
+    @staticmethod
+    def load(filename):
+        """
+        Loads a pickled DeepNeuralNetwork object.
+
+        Args:
+            filename: the file from which the object should be loaded
+        """
+        # Check if the file exists
+        if not os.path.exists(filename):
+            return None
+
+        # Open the file in read-binary mode and load the object
+        with open(filename, 'rb') as file:
+            return pickle.load(file)
