@@ -77,79 +77,86 @@ class DeepNeuralNetwork:
         return self.__weights
 
     def forward_prop(self, X):
-        """Calculates the forward propagation of the neural network.
+        """
+        Method to calculate forward propagation of the neural network.
 
         Args:
-            X: numpy.ndarray with shape (nx, m) that contains the input data.
+            X: numpy.ndarray with shape (nx, m) that contains the input data
 
         Returns:
-            The output of the neural network and the cache, respectively.
+            The output of the neural network and the cache, where cache is
+            the dictionary containing all the intermediary values of the network
         """
-        # Save the input data to the cache dictionary
+        # Store the input data in the cache
         self.__cache['A0'] = X
+        L1 = self.__L
 
-        # Loop over all layers
-        for i in range(self.__L):
-            # Generate keys for weights, biases, and activations
-            W_key = 'W' + str(i + 1)
-            b_key = 'b' + str(i + 1)
-            A_key = 'A' + str(i)
-
-            # Calculate the net input for the current layer
-            Z = np.dot(self.__weights[W_key], self.__cache[A_key])
-            Z += self.__weights[b_key]
-
-            if i == self.__L - 1:
-                # Softmax activation for the output layer
-                self.__cache['A' + str(i + 1)] = np.exp(Z) / np.sum(np.exp(Z), axis=0)
+        # Loop over all layers in the network
+        for lopper in range(1, L1):
+            # Calculate the weighted input for the current layer
+            Z = (np.matmul(self.__weights["W" + str(lopper)],
+                        self.__cache['A' + str(lopper - 1)]) +
+                self.__weights['b' + str(lopper)])
+            # Apply the activation function
+            if self.__activation == 'sig':
+                # Sigmoid activation function
+                A = 1 / (1 + np.exp(-Z))
             else:
-                # Sigmoid activation for the hidden layers
-                self.__cache['A' + str(i + 1)] = 1 / (1 + np.exp(-Z))
+                # Hyperbolic tangent activation function
+                A = np.tanh(Z)
+            # Store the output of the activation function in the cache
+            self.__cache['A' + str(lopper)] = A
 
-        # Return the output of the neural network and the cache
-        return self.__cache['A' + str(self.__L)], self.__cache
+        # Calculate the weighted input for the output layer
+        Z = (np.matmul(self.__weights["W" + str(L1)],
+                    self.__cache['A' + str(L1 - 1)]) +
+            self.__weights['b' + str(L1)])
+        # Apply the softmax activation function
+        A = np.exp(Z) / np.sum(np.exp(Z), axis=0)
+        # Store the output of the activation function in the cache
+        self.__cache['A' + str(L1)] = A
+
+        # Return the output of the network and the cache
+        return A, self.__cache
 
     def cost(self, Y, A):
-        """Calculates the cost of the model using logistic regression.
+        """
+        Calculate the cross-entropy cost for multiclass classification.
 
         Args:
-            Y: numpy.ndarray with shape (nx, m) that contains the input data.
-            A: numpy.ndarray with shape (1, m) that contains the correct
-            Activation output of the network.
+            Y: numpy.ndarray with shape (classes, m) that contains the correct
+            labels for the input data
+            A: numpy.ndarray with shape (classes, m) containing the activated
+            output of the network for each example
 
         Returns:
-            The cost.
+            The cost
         """
         # Number of examples
         m = Y.shape[1]
+        # Calculate the cross-entropy cost
+        log_loss = -(1 / m) * np.sum(Y * np.log(A))
 
-        # Compute the cost using the formula for categorical cross-entropy
-        cost = -1 / m * np.sum(Y * np.log(A))
-
-        return cost
+        return log_loss
 
     def evaluate(self, X, Y):
-        """Evaluates the neural network's predictions.
+        """
+        Method to evaluate the network's predictions.
 
         Args:
-            X: numpy.ndarray with shape (nx, m) that contains
-            the input data.
-            Y: numpy.ndarray with shape (1, m) that contains
-            the correct labels.
+            X: numpy.ndarray with shape (nx, m) that contains the input data
+            Y: numpy.ndarray with shape (1, m) that contains the correct labels
 
         Returns:
-            The predicted labels for X, and the cost of the network.
+            The predicted labels for each example and the cost of the network
         """
         # Perform forward propagation
         A, _ = self.forward_prop(X)
-
         # Calculate the cost
         cost = self.cost(Y, A)
 
-        # Prediction of the class with the highest probability
-        prediction = np.argmax(A, axis=0)
-
-        return prediction, cost
+        # Return the predicted labels and the cost
+        return np.where(A == np.max(A, axis=0), 1, 0), cost
 
     def gradient_descent(self, Y, cache, alpha=0.05):
         """ Calculates one pass of gradient
