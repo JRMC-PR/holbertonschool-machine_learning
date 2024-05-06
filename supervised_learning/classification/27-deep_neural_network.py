@@ -46,6 +46,7 @@ class DeepNeuralNetwork:
         self.__cache = {}
         # Initialize weights as an empty dictionary
         self.__weights = {}
+        self.__activasion = "sig"
         for i in range(self.L):
             # Initialize weights using He et al. method
             # If it's the first layer, the weights are based
