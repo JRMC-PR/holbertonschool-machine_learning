@@ -86,7 +86,7 @@ class DeepNeuralNetwork:
             The output of the neural network and the cache, respectively.
         """
         # Save the input data to the cache dictionary
-        self.cache['A0'] = X
+        self.__cache['A0'] = X
 
         # Loop over all layers
         for i in range(self.__L):
@@ -96,11 +96,15 @@ class DeepNeuralNetwork:
             A_key = 'A' + str(i)
 
             # Calculate the net input for the current layer
-            Z = np.dot(self.weights[W_key], self.__cache[A_key])
-            Z += self.weights[b_key]
+            Z = np.dot(self.__weights[W_key], self.__cache[A_key])
+            Z += self.__weights[b_key]
 
-            # Apply the sigmoid activation function
-            self.__cache['A' + str(i + 1)] = 1 / (1 + np.exp(-Z))
+            if i == self.__L - 1:
+                # Softmax activation for the output layer
+                self.__cache['A' + str(i + 1)] = np.exp(Z) / np.sum(np.exp(Z), axis=0)
+            else:
+                # Sigmoid activation for the hidden layers
+                self.__cache['A' + str(i + 1)] = 1 / (1 + np.exp(-Z))
 
         # Return the output of the neural network and the cache
         return self.__cache['A' + str(self.__L)], self.__cache
@@ -119,9 +123,8 @@ class DeepNeuralNetwork:
         # Number of examples
         m = Y.shape[1]
 
-        # Compute the cost using the formula for binary cross-entropy
-        logprob = Y * np.log(A) + (1 - Y) * np.log(1.0000001 - A)
-        cost = -1 / m * np.sum(logprob)
+        # Compute the cost using the formula for categorical cross-entropy
+        cost = -1 / m * np.sum(Y * np.log(A))
 
         return cost
 
@@ -143,8 +146,8 @@ class DeepNeuralNetwork:
         # Calculate the cost
         cost = self.cost(Y, A)
 
-        # Apply the sigmoid activation function to get binary predictions
-        prediction = np.where(A >= 0.5, 1, 0)
+        # Prediction of the class with the highest probability
+        prediction = np.argmax(A, axis=0)
 
         return prediction, cost
 
