@@ -1,4 +1,4 @@
-#!?usr/bin/env python3
+#!/usr/bin/env python3
 """This module defines a function that converts a one-hot
 matrix into a vector of labels"""
 import numpy as np
