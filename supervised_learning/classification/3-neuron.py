@@ -76,6 +76,8 @@ class Neuron:
             Y (numpy.ndarray): contains the correct labels for the input data
             A (numpy.ndarray): containing the activated output of the neuron
 
+        the function reperesent the binary cross-entropy
+
         Returns:
             float: representing the cost of the model
         """

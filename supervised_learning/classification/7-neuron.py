@@ -162,6 +162,7 @@ class Neuron:
             self.forward_prop(X)
             # Calculate the cost
             cost = self.cost(Y, self.__A)
+            #TODO: cherck the verbose and graph first before calculating the cost
             # If the current iteration is a multiple of
             # step or the last iteration
             if i % step == 0 or i == iterations:
