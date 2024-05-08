@@ -46,7 +46,7 @@ class DeepNeuralNetwork:
         self.__cache = {}
         # Initialize weights as an empty dictionary
         self.__weights = {}
-        if activation not in  ['sig', 'tanh']:
+        if activation not in ['sig', 'tanh']:
             raise ValueError("activation must be 'sig' or 'tanh'")
         self.__activation = activation
         for i in range(self.L):
@@ -80,6 +80,7 @@ class DeepNeuralNetwork:
     def weights(self):
         """This method retrieves the weights and biases"""
         return self.__weights
+
     @property
     def activation(self):
         """This method retrieves the activation function"""
@@ -226,7 +227,7 @@ class DeepNeuralNetwork:
             if self.__activation == "sig":
                 dZ = dZ_step1 * (A_prev * (1 - A_prev))
             elif self.__activation == "tanh":
-                 dZ = dZ_step1 * (1 - (A_prev ** 2))
+                dZ = dZ_step1 * (1 - (A_prev ** 2))
             # Update the weights and biases
             self.weights["W" + str(i)] -= alpha * dW
             self.weights["b" + str(i)] -= alpha * db
