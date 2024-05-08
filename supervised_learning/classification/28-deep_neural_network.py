@@ -12,7 +12,7 @@ class DeepNeuralNetwork:
     performing binary classification
     """
 
-    def __init__(self, nx, layers):
+    def __init__(self, nx, layers, activation='sig'):
         """Class constructor
         Args:
             nx: number of input features
@@ -46,7 +46,9 @@ class DeepNeuralNetwork:
         self.__cache = {}
         # Initialize weights as an empty dictionary
         self.__weights = {}
-        self.__activation = "sig"
+        if activation not in  ['sig', 'tanh']:
+            raise ValueError("activation must be 'sig' or 'tanh'")
+        self.__activation = activation
         for i in range(self.L):
             # Initialize weights using He et al. method
             # If it's the first layer, the weights are based
@@ -78,6 +80,10 @@ class DeepNeuralNetwork:
     def weights(self):
         """This method retrieves the weights and biases"""
         return self.__weights
+    @property
+    def activation(self):
+        """This method retrieves the activation function"""
+        return self.__activation
 
     def forward_prop(self, X):
         """
@@ -217,7 +223,10 @@ class DeepNeuralNetwork:
             # Calculate the derivative of the cost
             # with respect to the activation
             dZ_step1 = np.dot(self.weights["W" + str(i)].T, dZ)
-            dZ = dZ_step1 * (A_prev * (1 - A_prev))
+            if self.__activation == "sig":
+                dZ = dZ_step1 * (A_prev * (1 - A_prev))
+            elif self.__activation == "tanh":
+                 dZ = dZ_step1 * (1 - (A_prev ** 2))
             # Update the weights and biases
             self.weights["W" + str(i)] -= alpha * dW
             self.weights["b" + str(i)] -= alpha * db
