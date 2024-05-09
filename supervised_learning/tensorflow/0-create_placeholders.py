@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """This module has the method create_placeholders(nx, classes)"""
 
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 tf.disable_v2_behavior()
 
 
