@@ -4,7 +4,7 @@
 import tensorflow.compat.v1 as tf
 
 
-def create_pleaceholder(nx, classes):
+def create_placeholders(nx, classes):
     """This method create placeholders
     Args:
         nx: the number of feature columns in our data
