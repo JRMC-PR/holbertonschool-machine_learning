@@ -2,7 +2,6 @@
 """This module has the method create_placeholders(nx, classes)"""
 
 import tensorflow.compat.v1 as tf
-tf.disable_v2_behavior()
 
 
 def create_pleaceholder(nx, classes):
