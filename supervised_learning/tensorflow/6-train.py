@@ -1,7 +1,7 @@
 #!/usr/bin/env python3
 """This modlue contains the function train
 """
-import tensorflow as tf
+import tensorflow.compat.v1 as tf
 import numpy as np
 
 
