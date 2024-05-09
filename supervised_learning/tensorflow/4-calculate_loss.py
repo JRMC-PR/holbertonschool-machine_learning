@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """Thismodule contains the function calculate_loss"""
+
 import tensorflow.compat.v1 as tf
 
 
