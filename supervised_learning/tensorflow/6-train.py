@@ -1,9 +1,8 @@
 #!/usr/bin/env python3
-"""This modlue contains the function train
-"""
+"""This module contains the function train"""
 import tensorflow.compat.v1 as tf
-import numpy as np
 
+tf.disable_v2_behavior()
 
 calculate_accuracy = __import__("3-calculate_accuracy").calculate_accuracy
 calculate_loss = __import__("4-calculate_loss").calculate_loss
