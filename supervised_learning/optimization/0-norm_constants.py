@@ -4,6 +4,7 @@ the normalization constants of a matrix
 """
 import numpy as np
 
+
 def normalization_constants(X):
     """
     Calculate the mean and standard deviation of each feature in a matrix.
