@@ -1,4 +1,4 @@
-#!/usr/bin.env python3
+#!/usr/bin/env python3
 """This module contains the function for updating a variable using the Adam
 """
 import tensorflow as tf
