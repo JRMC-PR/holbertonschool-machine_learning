@@ -5,6 +5,7 @@ optimization operation in Tensorflow
 
 import tensorflow as tf
 
+
 def create_momentum_op(alpha, beta1):
     """
     Set up the gradient descent with momentum
