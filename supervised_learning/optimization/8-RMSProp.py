@@ -5,7 +5,7 @@ optimization algorithm
 import tensorflow as tf
 
 
-def create_RMSProp_op(loss, alpha, beta2, epsilon):
+def create_RMSProp_op(alpha, beta2, epsilon):
     """
     Set up the RMSProp optimization algorithm in TensorFlow.
 
@@ -24,8 +24,6 @@ def create_RMSProp_op(loss, alpha, beta2, epsilon):
         tf.keras.optimizers.RMSprop(learning_rate=alpha, rho=beta2,
                                     epsilon=epsilon)
 
-    # Compute and apply gradients
-    optimizer.minimize(loss)
 
     # Return the optimizer
     return optimizer
