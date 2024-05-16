@@ -22,8 +22,9 @@ def learning_rate_decay(alpha, decay_rate, global_step, decay_step):
     Returns:
     float: The updated value for alpha.
     """
+
     # Calculate the decay factor
-    decay_factor = 1 / (1 + decay_rate * np.floor(global_step / decay_step))
+    decay_factor = 1 / (1 + decay_rate * (global_step // decay_step))
 
     # Update the learning rate
     alpha_updated = alpha * decay_factor
