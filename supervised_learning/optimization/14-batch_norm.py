@@ -1,3 +1,7 @@
+#!/usr/bin/env python3
+"""This modlue contains the function for creating a batch normalization
+layer in Tensorflow.
+"""
 import tensorflow as tf
 
 
