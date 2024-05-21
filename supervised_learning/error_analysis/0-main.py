@@ -11,4 +11,4 @@ if __name__ == '__main__':
     np.set_printoptions(suppress=True)
     confusion = create_confusion_matrix(labels, logits)
     print(confusion)
-    np.savez_compressed('../data/onfusion.npz', confusion=confusion)
+    np.savez_compressed('../data/confusion.npz', confusion=confusion)
