@@ -30,23 +30,25 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     keep_prob: float - the probability that a node will be kept.
 
     Returns:
-    A dictionary containing the outputs of each layer and
+    A dictionary containing the outputs of each layer
     the dropout mask used on each layer.
     """
     cache = {}
     cache["A0"] = X
 
+
     for i in range(1, L + 1):
-        # Calculate the pre-activation linear
-        # combination of weights and inputs
-        Z = (
-            np.matmul(weights["W" + str(i)], cache["A" + str(i - 1)])
-            + weights["b" + str(i)]
-        )
+        # Calculate the pre-activation linear combination of weights and inputs
+        W_key = "W" + str(i)
+        A_key = "A" + str(i - 1)
+        b_key = "b" + str(i)
+        Z = np.matmul(weights[W_key], cache[A_key]) + weights[b_key]
         if i != L:
             # Apply tanh activation function and dropout
             A = tanh_activation(Z)
-            D = np.random.rand(A.shape[0], A.shape[1]) < keep_prob
+            # Convert boolean to int
+            random_array = np.random.rand(A.shape[0], A.shape[1])
+            D = (random_array < keep_prob).astype(int)
             A = np.multiply(A, D)
             A /= keep_prob
             cache["D" + str(i)] = D
