@@ -1,4 +1,4 @@
-#!/usr/bin/en python3
+#!/usr/bin/env python3
 """This module determines if you should stop
 gradient descent early
 """
