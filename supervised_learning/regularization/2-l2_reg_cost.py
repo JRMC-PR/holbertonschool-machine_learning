@@ -19,7 +19,10 @@ def l2_reg_cost(cost, model):
     # Get the list of regularization losses from the model
     reg_losses = model.losses
 
+    # Convert the list of regularization losses to a tensor
+    reg_losses_tensor = tf.convert_to_tensor(reg_losses)
+
     # Add the regularization losses to the original cost
-    total_cost = cost + tf.add_n(reg_losses)
+    total_cost = cost + reg_losses_tensor
 
     return total_cost
