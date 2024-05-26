@@ -36,7 +36,6 @@ def dropout_forward_prop(X, weights, L, keep_prob):
     cache = {}
     cache["A0"] = X
 
-
     for i in range(1, L + 1):
         # Calculate the pre-activation linear combination of weights and inputs
         W_key = "W" + str(i)
