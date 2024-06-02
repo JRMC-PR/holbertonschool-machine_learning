@@ -25,8 +25,9 @@ def build_model(nx, layers, activations, lambtha, keep_prob):
     # Definethe input layer
     inputs = K.Input(shape=(nx,))
 
-    # Initialize L2 regularization. This is a form of weight decay that encourages
-    # the model to have small weights, which helps prevent overfitting.
+    # Initialize L2 regularization. This is a form of weight decay that
+    # encourages the model to have small weights, which helps prevent
+    # overfitting.
     regularization = K.regularizers.l2(lambtha)
 
     # Define the fisrt layer witch is connected to the input layer
