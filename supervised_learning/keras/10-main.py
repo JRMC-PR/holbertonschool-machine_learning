@@ -25,11 +25,11 @@ weights = __import__('10-weights')
 
 if __name__ == '__main__':
 
-    network = model.load_model('network2.keras')
-    weights.save_weights(network, 'weights2.keras')
+    network = model.load_model('../data/network2.keras')
+    weights.save_weights(network, '../data/weights2.keras')
     del network
 
-    network2 = model.load_model('network1.keras')
+    network2 = model.load_model('../data/network1.keras')
     print(network2.get_weights())
-    weights.load_weights(network2, 'weights2.keras')
+    weights.load_weights(network2, '../data/weights2.keras')
     print(network2.get_weights())
