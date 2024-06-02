@@ -12,7 +12,7 @@ if __name__ == '__main__':
     Y_test = datasets['Y_test']
     Y_test_oh = one_hot(Y_test)
 
-    network = load_model('network2.keras')
+    network = load_model('../data/network2.keras')
     eval=test_model(network, X_test, Y_test_oh)
     print(eval)
     print("Loss:",np.round(eval[0],3))
