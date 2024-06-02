@@ -12,7 +12,7 @@ if __name__ == '__main__':
     X_test = X_test.reshape(X_test.shape[0], -1)
     Y_test = datasets['Y_test']
 
-    network = load_model('network2.keras')
+    network = load_model('../data/network2.keras')
     Y_pred = predict(network, X_test)
     print(Y_pred)
     print(np.argmax(Y_pred, axis=1))
