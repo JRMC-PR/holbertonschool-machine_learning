@@ -33,7 +33,7 @@ if __name__ == '__main__':
     Y_valid = datasets['Y_valid']
     Y_valid_oh = one_hot(Y_valid)
 
-    network = model.load_model('network1.keras')
+    network = model.load_model('../data/network1.keras')
     batch_size = 32
     epochs = 1000
     train_model(network, X_train, Y_train_oh, batch_size, epochs,
