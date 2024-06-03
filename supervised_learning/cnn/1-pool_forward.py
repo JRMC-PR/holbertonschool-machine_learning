@@ -1,4 +1,4 @@
-#!/bin/env python3
+#!/usr/bin/env python3
 """This moduleperforms forward propagation over
 a pooling layer of a neural network
 """
