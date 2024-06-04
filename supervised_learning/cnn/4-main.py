@@ -4,7 +4,7 @@ import matplotlib.pyplot as plt
 import numpy as np
 import os
 import random
-import tensorflow.compat.v1 as tf
+import tensorflow.compat.v1 as tf # type: ignore
 tf.disable_eager_execution()
 
 lenet5 = __import__('4-lenet5').lenet5

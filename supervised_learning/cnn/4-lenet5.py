@@ -2,7 +2,9 @@
 """
 Module to create a modified LeNet-5 architecture using tensorflow
 """
-import tensorflow as tf
+import tensorflow.compat.v1 as tf  # type: ignore
+
+tf.disable_v2_behavior()
 
 
 def lenet5(x, y):
@@ -26,48 +28,47 @@ def lenet5(x, y):
     init = tf.keras.initializers.VarianceScaling(scale=2.0)
 
     # Convolutional layer with 6 kernels of shape 5x5 with same padding
-    conv1 = tf.layers.Conv2D(
+    conv1 = tf.layers.conv2d(
+        x,
         filters=6,
         kernel_size=5,
         padding="same",
         activation=tf.nn.relu,
         kernel_initializer=init,
-    )(x)
+    )
 
     # Max pooling layer with kernels of shape 2x2 with 2x2 strides
-    pool1 = tf.layers.MaxPooling2D(pool_size=[2, 2], strides=2)(conv1)
+    pool1 = tf.layers.max_pooling2d(conv1, pool_size=[2, 2], strides=2)
 
     # Convolutional layer with 16 kernels of shape 5x5 with valid padding
-    conv2 = tf.layers.Conv2D(
+    conv2 = tf.layers.conv2d(
+        pool1,
         filters=16,
         kernel_size=5,
         padding="valid",
         activation=tf.nn.relu,
         kernel_initializer=init,
-    )(pool1)
+    )
 
     # Max pooling layer with kernels of shape 2x2 with 2x2 strides
-    pool2 = tf.layers.MaxPooling2D(pool_size=[2, 2], strides=2)(conv2)
+    pool2 = tf.layers.max_pooling2d(conv2, pool_size=[2, 2], strides=2)
 
     # Flatten the pool2 output
-    flat = tf.layers.Flatten()(pool2)
+    flat = tf.layers.flatten(pool2)
 
     # Fully connected layer with 120 nodes
-    fc1 = \
-        tf.layers.Dense(units=120, activation=tf.nn.relu,
-                        kernel_initializer=init)(
-                        flat
-                        )
+    fc1 = tf.layers.dense(
+        flat, units=120, activation=tf.nn.relu, kernel_initializer=init
+    )
 
     # Fully connected layer with 84 nodes
-    fc2 = \
-        tf.layers.Dense(units=84,
-                        activation=tf.nn.relu, kernel_initializer=init)(fc1)
+    fc2 = tf.layers.dense(fc1, units=84,
+                          activation=tf.nn.relu, kernel_initializer=init)
 
     # Fully connected softmax output layer with 10 nodes
-    softmax = tf.layers.Dense(
-        units=10, activation=tf.nn.softmax, kernel_initializer=init
-    )(fc2)
+    softmax = tf.layers.dense(
+        fc2, units=10, activation=tf.nn.softmax, kernel_initializer=init
+    )
 
     # Loss
     loss = tf.losses.softmax_cross_entropy(y, softmax)
