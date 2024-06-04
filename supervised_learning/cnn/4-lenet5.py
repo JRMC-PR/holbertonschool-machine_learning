@@ -1,7 +1,6 @@
 #!/usr/bin/env python3
-"""
-Module to create a modified LeNet-5 architecture using tensorflow
-"""
+"""This module contains a function that
+builds a modified version of the LeNet-5 architecture using TensorFlow"""
 import tensorflow.compat.v1 as tf  # type: ignore
 
 tf.disable_v2_behavior()
@@ -9,20 +8,20 @@ tf.disable_v2_behavior()
 
 def lenet5(x, y):
     """
-    Function that builds a modified version of the LeNet-5
-    architecture using tensorflow
+    Function that builds a modified version of the
+    LeNet-5 architecture using TensorFlow
 
     Parameters:
-    x is a tf.placeholder of shape (m, 28, 28, 1) containing
-    the input images for the network
-    y is a tf.placeholder of shape (m, 10) containing the
-    one-hot labels for the network
+    x is a tf.placeholder of shape (m, 28, 28, 1)
+    containing the input images for the network
+    y is a tf.placeholder of shape (m, 10) containing
+    the one-hot labels for the network
 
     Returns:
     a tensor for the softmax activated output
-    a training operation that utilizes Adam optimization
-    (with default hyperparameters)
-    a tensor for the loss of the netowrk
+    a training operation that utilizes Adam optimization (
+        with default hyperparameters)
+    a tensor for the loss of the network
     a tensor for the accuracy of the network
     """
     init = tf.keras.initializers.VarianceScaling(scale=2.0)
