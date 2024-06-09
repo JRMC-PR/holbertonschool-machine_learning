@@ -65,9 +65,11 @@ def lenet5(x, y):
                           activation=tf.nn.relu, kernel_initializer=init)
 
     # Fully connected softmax output layer with 10 nodes
-    softmax = tf.layers.dense(
-        fc2, units=10, activation=tf.nn.softmax, kernel_initializer=init
+    logits = tf.layers.dense(
+        fc2, units=10, kernel_initializer=init
     )
+    # Apply softmax to logits for prediction
+    softmax = tf.nn.softmax(logits)
 
     # Loss
     loss = tf.losses.softmax_cross_entropy(y, softmax)
