@@ -68,14 +68,15 @@ def lenet5(x, y):
     logits = tf.layers.dense(
         fc2, units=10, kernel_initializer=init
     )
-    # Apply softmax to logits for prediction
-    softmax = tf.nn.softmax(logits)
 
     # Loss
-    loss = tf.losses.softmax_cross_entropy(y, softmax)
+    loss = tf.losses.softmax_cross_entropy(y, logits)
 
     # Training operation
     train_op = tf.train.AdamOptimizer().minimize(loss)
+
+    # Apply softmax to logist for prediction
+    softmax = tf.nn.softmax(logits)
 
     # Accuracy
     correct_prediction = tf.equal(tf.argmax(softmax, 1), tf.argmax(y, 1))
