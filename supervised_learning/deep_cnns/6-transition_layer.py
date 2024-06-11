@@ -1,4 +1,4 @@
-#!/usr/bin/emv python3
+#!/usr/bin/env python3
 """This module contains the function
 transition_layer."""
 from tensorflow import keras as K
