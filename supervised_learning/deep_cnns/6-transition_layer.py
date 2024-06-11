@@ -10,7 +10,7 @@ def transition_layer(X, nb_filters, compression):
     Connected Convolutional Networks
 
     Args:
-    X -- output from the previous layer
+    X -- output frm the previous layer
     nb_filters -- integer representing the number of filters in X
     compression -- the compression factor for the transition layer
 
