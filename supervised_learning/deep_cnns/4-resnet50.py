@@ -19,7 +19,7 @@ def resnet50():
 
     # Apply convolutions and max pooling before the blocks
     x = K.layers.Conv2D(64, (7, 7), strides=(2, 2),
-                        padding='same', activation='relu',
+                        padding='same', activation='linear',
                         kernel_initializer=K.initializers.he_normal(
                             seed=0))(inputs)
     x = K.layers.BatchNormalization(axis=3)(x)
