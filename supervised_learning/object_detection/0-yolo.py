@@ -4,6 +4,7 @@ that uses the Yolo v3 algorithm to perform object detection
 """
 import tensorflow.keras as K
 
+
 class Yolo:
     """This class uses the Yolo v3 algorithm to perform object detection
     """
@@ -33,4 +34,3 @@ class Yolo:
         self.class_t = class_t
         self.nms_t = nms_t
         self.anchors = anchors
-
