@@ -1,8 +1,104 @@
 
 ## Object Detection
 
+## General
+
+# Object Detection and Image Processing Concepts
+
+## What is OpenCV and how do you use it?
+OpenCV (Open Source Computer Vision Library) is an open-source computer vision and machine learning software library. It contains more than 2500 optimized algorithms, which can be used for a variety of tasks including detecting and recognizing faces, identifying objects, classifying human actions in videos, tracking camera movements, and extracting 3D models of objects. OpenCV is widely used in both academia and industry for its comprehensive functionality and performance.
+
+### Usage:
+To use OpenCV, you need to install the library (`pip install opencv-python`) and import it into your Python script. Basic operations include reading images, converting color spaces, applying filters, and detecting edges.
+
+```python
+import cv2
+
+# Load an image
+image = cv2.imread('image.jpg')
+
+# Convert to grayscale
+gray_image = cv2.cvtColor(image, cv2.COLOR_BGR2GRAY)
+
+# Display the image
+cv2.imshow('Gray Image', gray_image)
+cv2.waitKey(0)
+cv2.destroyAllWindows()
+```
+
+## What is object detection?
+Object detection is a computer vision technique used to identify and locate objects within an image or video. This involves not only classifying objects but also drawing bounding boxes around them to indicate their positions. Object detection algorithms are crucial in various applications, such as surveillance, autonomous driving, and image retrieval.
+
+## What is the Sliding Windows algorithm?
+The Sliding Windows algorithm is a technique used in object detection where a fixed-size window slides over the input image to detect objects. At each position of the window, a classifier determines whether the window contains the object of interest. This method ensures that objects of different scales and aspect ratios can be detected by resizing the window or the input image.
+
+## What is a single-shot detector?
+A single-shot detector (SSD) is a type of object detection algorithm that detects objects in images in a single forward pass of the network. Unlike traditional methods that use region proposals and multiple stages, SSD combines predictions of different aspect ratios and scales from multiple feature maps to achieve high accuracy and real-time performance.
+
+## What is the YOLO algorithm?
+YOLO (You Only Look Once) is a state-of-the-art, real-time object detection algorithm. YOLO divides the input image into a grid and predicts bounding boxes and probabilities for each grid cell. It treats object detection as a single regression problem, directly predicting class probabilities and bounding box coordinates. YOLO is known for its speed and accuracy.
+
+## What is IOU and how do you calculate it?
+Intersection over Union (IOU) is a metric used to evaluate the accuracy of an object detector on a particular dataset. IOU calculates the overlap between two bounding boxes: the predicted bounding box and the ground truth bounding box. It is defined as the area of the intersection divided by the area of the union of the two bounding boxes.
+
+### Calculation:
+Given two bounding boxes A and B:
+```python
+def calculate_iou(boxA, boxB):
+    xA = max(boxA[0], boxB[0])
+    yA = max(boxA[1], boxB[1])
+    xB = min(boxA[2], boxB[2])
+    yB = min(boxA[3], boxB[3])
+
+    # Compute the area of intersection rectangle
+    interArea = max(0, xB - xA + 1) * max(0, yB - yA + 1)
+
+    # Compute the area of both the prediction and ground-truth rectangles
+    boxAArea = (boxA[2] - boxA[0] + 1) * (boxA[3] - boxA[1] + 1)
+    boxBArea = (boxB[2] - boxB[0] + 1) * (boxB[3] - boxB[1] + 1)
+
+    # Compute the intersection over union by taking the intersection
+    # area and dividing it by the sum of prediction + ground-truth
+    # areas - the intersection area
+    iou = interArea / float(boxAArea + boxBArea - interArea)
+
+    return iou
+```
+
+## What is non-max suppression?
+Non-max suppression is a technique used in object detection to filter out redundant bounding boxes. When multiple bounding boxes are predicted for the same object, non-max suppression keeps only the box with the highest confidence score and eliminates the others based on their IOU values.
+
+### Steps:
+1. Select the box with the highest confidence score.
+2. Compare this box with the remaining boxes and remove those with IOU greater than a threshold.
+3. Repeat the process for the next highest confidence box.
+
+## What are anchor boxes?
+Anchor boxes are predefined bounding boxes of different sizes and aspect ratios used in object detection models like SSD and YOLO. They serve as references to predict the location and size of objects in the image. The model learns to adjust these anchor boxes to better fit the ground truth boxes during training.
+
+## What is mAP and how do you calculate it?
+Mean Average Precision (mAP) is a metric used to evaluate the performance of object detection algorithms. It averages the precision of each class at different recall levels. Precision and recall are calculated from the true positives, false positives, and false negatives. The mAP is the mean of the average precision values for all classes.
+
+### Calculation:
+1. Compute precision and recall for each class.
+2. Plot the precision-recall curve.
+3. Calculate the area under the curve (AUC) for each class.
+4. Compute the mean of the AUCs across all classes.
+
+```python
+from sklearn.metrics import precision_recall_curve, auc
+
+# Example precision and recall arrays
+precision = [0.9, 0.8, 0.7, 0.6]
+recall = [0.1, 0.2, 0.3, 0.4]
+
+# Calculate AUC for the precision-recall curve
+auc_score = auc(recall, precision)
+```
+# Tasks
+
 ### Description
-0. Initialize YolomandatoryWrite a classYolothat uses the Yolo v3 algorithm to perform object detection:class constructor:def __init__(self, model_path, classes_path, class_t, nms_t, anchors):model_pathis the path to where a Darknet Keras model is storedclasses_pathis the path to where the list of class names used for the Darknet model, listed in order of index, can be foundclass_tis a float representing the box score threshold for the initial filtering stepnms_tis a float representing the IOU threshold for non-max suppressionanchorsis anumpy.ndarrayof shape(outputs, anchor_boxes, 2)containing all of the anchor boxes:outputsis the number of outputs (predictions) made by the Darknet modelanchor_boxesis the number of anchor boxes used for each prediction2=>[anchor_box_width, anchor_box_height]Public instance attributes:model: the Darknet Keras modelclass_names: a list of the class names for the modelclass_t: the box score threshold for the initial filtering stepnms_t: the IOU threshold for non-max suppressionanchors: the anchor boxesroot@alexa-ml2:~/object_detection# cat 0-main.py 
+0. Initialize YolomandatoryWrite a classYolothat uses the Yolo v3 algorithm to perform object detection:class constructor:def __init__(self, model_path, classes_path, class_t, nms_t, anchors):model_pathis the path to where a Darknet Keras model is storedclasses_pathis the path to where the list of class names used for the Darknet model, listed in order of index, can be foundclass_tis a float representing the box score threshold for the initial filtering stepnms_tis a float representing the IOU threshold for non-max suppressionanchorsis anumpy.ndarrayof shape(outputs, anchor_boxes, 2)containing all of the anchor boxes:outputsis the number of outputs (predictions) made by the Darknet modelanchor_boxesis the number of anchor boxes used for each prediction2=>[anchor_box_width, anchor_box_height]Public instance attributes:model: the Darknet Keras modelclass_names: a list of the class names for the modelclass_t: the box score threshold for the initial filtering stepnms_t: the IOU threshold for non-max suppressionanchors: the anchor boxesroot@alexa-ml2:~/object_detection# cat 0-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -19,7 +115,7 @@ if __name__ == '__main__':
     print('Class threshold:', yolo.class_t)
     print('NMS threshold:', yolo.nms_t)
     print('Anchor boxes:', yolo.anchors)
-root@alexa-ml2:~/object_detection# ./0-main.py 
+root@alexa-ml2:~/object_detection# ./0-main.py
 WARNING:tensorflow:No training configuration found in the save file, so the model was *not* compiled. Compile it manually.
 Model: "model"
 __________________________________________________________________________________________________
@@ -96,7 +192,7 @@ Anchor boxes: [[[116  90]
   [ 33  23]]]
 root@alexa-ml2:~/object_detection#Repo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:0-yolo.pyHelp×Students who are done with "0. Initialize Yolo"Review your work×Correction of "0. Initialize Yolo"Start a new testCloseRequirement successRequirement failCode successCode failEfficiency successEfficiency failText answer successText answer failSkipped - Previous check failed0/7pts
 
-1. Process OutputsmandatoryWrite a classYolo(Based on0-yolo.py):Add the public methoddef process_outputs(self, outputs, image_size):outputsis a list ofnumpy.ndarrays containing the predictions from the Darknet model for a single image:Each output will have the shape(grid_height, grid_width, anchor_boxes, 4 + 1 + classes)grid_height&grid_width=> the height and width of the grid used for the outputanchor_boxes=> the number of anchor boxes used4=>(t_x, t_y, t_w, t_h)1=>box_confidenceclasses=> class probabilities for all classesimage_sizeis anumpy.ndarraycontaining the image’s original size[image_height, image_width]Returns a tuple of(boxes, box_confidences, box_class_probs):boxes: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 4)containing the processed boundary boxes for each output, respectively:4=>(x1, y1, x2, y2)(x1, y1, x2, y2)should represent the boundary box relative to original imagebox_confidences: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 1)containing the box confidences for each output, respectivelybox_class_probs: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, classes)containing the box’s class probabilities for each output, respectivelyHINT1: The Darknet model is an input to the class for a reason. It may not always have the same number of outputs, input sizes, etc.HINT2: An explanatory video that might help :LINK.root@alexa-ml2:~/object_detection# cat 1-main.py 
+1. Process OutputsmandatoryWrite a classYolo(Based on0-yolo.py):Add the public methoddef process_outputs(self, outputs, image_size):outputsis a list ofnumpy.ndarrays containing the predictions from the Darknet model for a single image:Each output will have the shape(grid_height, grid_width, anchor_boxes, 4 + 1 + classes)grid_height&grid_width=> the height and width of the grid used for the outputanchor_boxes=> the number of anchor boxes used4=>(t_x, t_y, t_w, t_h)1=>box_confidenceclasses=> class probabilities for all classesimage_sizeis anumpy.ndarraycontaining the image’s original size[image_height, image_width]Returns a tuple of(boxes, box_confidences, box_class_probs):boxes: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 4)containing the processed boundary boxes for each output, respectively:4=>(x1, y1, x2, y2)(x1, y1, x2, y2)should represent the boundary box relative to original imagebox_confidences: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 1)containing the box confidences for each output, respectivelybox_class_probs: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, classes)containing the box’s class probabilities for each output, respectivelyHINT1: The Darknet model is an input to the class for a reason. It may not always have the same number of outputs, input sizes, etc.HINT2: An explanatory video that might help :LINK.root@alexa-ml2:~/object_detection# cat 1-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -115,7 +211,7 @@ if __name__ == '__main__':
     print('Boxes:', boxes)
     print('Box confidences:', box_confidences)
     print('Box class probabilities:', box_class_probs)
-root@alexa-ml2:~/object_detection# ./1-main.py 
+root@alexa-ml2:~/object_detection# ./1-main.py
 WARNING:tensorflow:No training configuration found in save file: the model was *not* compiled. Compile it manually.
 Boxes: [array([[[[-2.13743365e+02, -4.85478868e+02,  3.05682061e+02,
            5.31534670e+02],
@@ -230,7 +326,7 @@ Box class probabilities: [array([[[[0.27343225, 0.72113296, 0.46223277, ..., 0.6
           0.18169015, 0.36450041]]]])]
 root@alexa-ml2:~/object_detection#Repo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:1-yolo.pyHelp×Students who are done with "1. Process Outputs"Review your work×Correction of "1. Process Outputs"Start a new testCloseRequirement successRequirement failCode successCode failEfficiency successEfficiency failText answer successText answer failSkipped - Previous check failed0/8pts
 
-2. Filter BoxesmandatoryWrite a classYolo(Based on1-yolo.py):Add the public methoddef filter_boxes(self, boxes, box_confidences, box_class_probs):boxes: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 4)containing the processed boundary boxes for each output, respectivelybox_confidences: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 1)containing the processed box confidences for each output, respectivelybox_class_probs: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, classes)containing the processed box class probabilities for each output, respectivelyReturns a tuple of(filtered_boxes, box_classes, box_scores):filtered_boxes: anumpy.ndarrayof shape(?, 4)containing all of the filtered bounding boxes:box_classes: anumpy.ndarrayof shape(?,)containing the class number that each box infiltered_boxespredicts, respectivelybox_scores: anumpy.ndarrayof shape(?)containing the box scores for each box infiltered_boxes, respectivelyroot@alexa-ml2:~/object_detection# cat 2-main.py 
+2. Filter BoxesmandatoryWrite a classYolo(Based on1-yolo.py):Add the public methoddef filter_boxes(self, boxes, box_confidences, box_class_probs):boxes: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 4)containing the processed boundary boxes for each output, respectivelybox_confidences: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, 1)containing the processed box confidences for each output, respectivelybox_class_probs: a list ofnumpy.ndarrays of shape(grid_height, grid_width, anchor_boxes, classes)containing the processed box class probabilities for each output, respectivelyReturns a tuple of(filtered_boxes, box_classes, box_scores):filtered_boxes: anumpy.ndarrayof shape(?, 4)containing all of the filtered bounding boxes:box_classes: anumpy.ndarrayof shape(?,)containing the class number that each box infiltered_boxespredicts, respectivelybox_scores: anumpy.ndarrayof shape(?)containing the box scores for each box infiltered_boxes, respectivelyroot@alexa-ml2:~/object_detection# cat 2-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -263,7 +359,7 @@ Box classes: [19 54 29 ... 63 25 46]
 Box scores: [0.7850503  0.67898563 0.81301861 ... 0.8012832  0.61427808 0.64562072]
 root@alexa-ml2:~/object_detection#Repo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:2-yolo.pyHelp×Students who are done with "2. Filter Boxes"Review your work×Correction of "2. Filter Boxes"Start a new testCloseRequirement successRequirement failCode successCode failEfficiency successEfficiency failText answer successText answer failSkipped - Previous check failed0/8pts
 
-3. Non-max SuppressionmandatoryWrite a classYolo(Based on2-yolo.py):Add the public methoddef non_max_suppression(self, filtered_boxes, box_classes, box_scores):filtered_boxes: anumpy.ndarrayof shape(?, 4)containing all of the filtered bounding boxes:box_classes: anumpy.ndarrayof shape(?,)containing the class number for the class thatfiltered_boxespredicts, respectivelybox_scores: anumpy.ndarrayof shape(?)containing the box scores for each box infiltered_boxes, respectivelyReturns a tuple of(box_predictions, predicted_box_classes, predicted_box_scores):box_predictions: anumpy.ndarrayof shape(?, 4)containing all of the predicted bounding boxes ordered by class and box scorepredicted_box_classes: anumpy.ndarrayof shape(?,)containing the class number forbox_predictionsordered by class and box score, respectivelypredicted_box_scores: anumpy.ndarrayof shape(?)containing the box scores forbox_predictionsordered by class and box score, respectivelyroot@alexa-ml2:~/object_detection# cat 3-main.py 
+3. Non-max SuppressionmandatoryWrite a classYolo(Based on2-yolo.py):Add the public methoddef non_max_suppression(self, filtered_boxes, box_classes, box_scores):filtered_boxes: anumpy.ndarrayof shape(?, 4)containing all of the filtered bounding boxes:box_classes: anumpy.ndarrayof shape(?,)containing the class number for the class thatfiltered_boxespredicts, respectivelybox_scores: anumpy.ndarrayof shape(?)containing the box scores for each box infiltered_boxes, respectivelyReturns a tuple of(box_predictions, predicted_box_classes, predicted_box_scores):box_predictions: anumpy.ndarrayof shape(?, 4)containing all of the predicted bounding boxes ordered by class and box scorepredicted_box_classes: anumpy.ndarrayof shape(?,)containing the class number forbox_predictionsordered by class and box score, respectivelypredicted_box_scores: anumpy.ndarrayof shape(?)containing the box scores forbox_predictionsordered by class and box score, respectivelyroot@alexa-ml2:~/object_detection# cat 3-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -297,7 +393,7 @@ Box classes: [ 0  0  0 ... 79 79 79]
 Box scores: [0.80673525 0.80405611 0.78972362 ... 0.61758194 0.61455015 0.6001824 ]
 root@alexa-ml2:~/object_detection#Repo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:3-yolo.pyHelp×Students who are done with "3. Non-max Suppression"Review your work×Correction of "3. Non-max Suppression"Start a new testCloseRequirement successRequirement failCode successCode failEfficiency successEfficiency failText answer successText answer failSkipped - Previous check failed0/8pts
 
-4. Load imagesmandatoryWrite a classYolo(Based on3-yolo.py):Add the static methoddef load_images(folder_path):folder_path: a string representing the path to the folder holding all the images to loadReturns a tuple of(images, image_paths):images: a list of images asnumpy.ndarraysimage_paths: a list of paths to the individual images inimagesroot@alexa-ml2:~/object_detection# cat 4-main.py 
+4. Load imagesmandatoryWrite a classYolo(Based on3-yolo.py):Add the static methoddef load_images(folder_path):folder_path: a string representing the path to the folder holding all the images to loadReturns a tuple of(images, image_paths):images: a list of images asnumpy.ndarraysimage_paths: a list of paths to the individual images inimagesroot@alexa-ml2:~/object_detection# cat 4-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -323,7 +419,7 @@ WARNING:tensorflow:No training configuration found in the save file, so the mode
 0
 yolo_images/yolo/dog.jpgRepo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:4-yolo.pyHelp×Students who are done with "4. Load images"Review your work×Correction of "4. Load images"Start a new testCloseRequirement successRequirement failCode successCode failEfficiency successEfficiency failText answer successText answer failSkipped - Previous check failed0/8pts
 
-5. Preprocess imagesmandatoryWrite a classYolo(Based on4-yolo.py):Add the public methoddef preprocess_images(self, images):images: a list of images asnumpy.ndarraysResize the images with inter-cubic interpolationRescale all images to have pixel values in the range[0, 1]Returns a tuple of(pimages, image_shapes):pimages: anumpy.ndarrayof shape(ni, input_h, input_w, 3)containing all of the preprocessed imagesni: the number of images that were preprocessedinput_h: the input height for the Darknet modelNote: this can vary by modelinput_w: the input width for the Darknet modelNote: this can vary by model3: number of color channelsimage_shapes: anumpy.ndarrayof shape(ni, 2)containing the original height and width of the images2=>(image_height, image_width)root@alexa-ml2:~/object_detection# cat 5-main.py 
+5. Preprocess imagesmandatoryWrite a classYolo(Based on4-yolo.py):Add the public methoddef preprocess_images(self, images):images: a list of images asnumpy.ndarraysResize the images with inter-cubic interpolationRescale all images to have pixel values in the range[0, 1]Returns a tuple of(pimages, image_shapes):pimages: anumpy.ndarrayof shape(ni, input_h, input_w, 3)containing all of the preprocessed imagesni: the number of images that were preprocessedinput_h: the input height for the Darknet modelNote: this can vary by modelinput_w: the input width for the Darknet modelNote: this can vary by model3: number of color channelsimage_shapes: anumpy.ndarrayof shape(ni, 2)containing the original height and width of the images2=>(image_height, image_width)root@alexa-ml2:~/object_detection# cat 5-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
@@ -346,7 +442,7 @@ if __name__ == '__main__':
     cv2.imshow(image_paths[i], pimages[i])
     cv2.waitKey(0)
     cv2.destroyAllWindows()
-root@alexa-ml2:~/object_detection# ./5-main.py 
+root@alexa-ml2:~/object_detection# ./5-main.py
 WARNING:tensorflow:No training configuration found in save file: the model was *not* compiled. Compile it manually.
 <class 'numpy.ndarray'> (6, 416, 416, 3)
 <class 'numpy.ndarray'> (6, 2)
@@ -381,7 +477,7 @@ WARNING:tensorflow:No training configuration found in save file: the model was *
 dog.jpg
 root@alexa-ml2-1:~/object_detection#Repo:GitHub repository:holbertonschool-machine_learningDirectory:supervised_learning/object_detectionFile:6-yolo.pyHelp×Students who are done with "6. Show boxes"0/9pts
 
-7. PredictmandatoryWrite a classYolo(Based on6-yolo.py):Add the public methoddef predict(self, folder_path):folder_path: a string representing the path to the folder holding all the images to predictAll image windows should be named after the corresponding image filename without its full path(see examples below)Displays all images using theshow_boxesmethodReturns: a tuple of(predictions, image_paths):predictions: a list of tuples for each image of(boxes, box_classes, box_scores)image_paths: a list of image paths corresponding to each prediction inpredictionsroot@alexa-ml2:~/object_detection# cat 7-main.py 
+7. PredictmandatoryWrite a classYolo(Based on6-yolo.py):Add the public methoddef predict(self, folder_path):folder_path: a string representing the path to the folder holding all the images to predictAll image windows should be named after the corresponding image filename without its full path(see examples below)Displays all images using theshow_boxesmethodReturns: a tuple of(predictions, image_paths):predictions: a list of tuples for each image of(boxes, box_classes, box_scores)image_paths: a list of image paths corresponding to each prediction inpredictionsroot@alexa-ml2:~/object_detection# cat 7-main.py
 #!/usr/bin/env python3
 
 if __name__ == '__main__':
