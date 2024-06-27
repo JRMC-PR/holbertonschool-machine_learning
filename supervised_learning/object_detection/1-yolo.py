@@ -74,63 +74,32 @@ class Yolo:
                 probabilities for
                 each output, respectively
         """
-        # boxes = []
-        # box_confidences = []
-        # box_class_probs = []
-
-        # # unpack the output
-        # for output in outputs:
-        #     grid_height, grid_width, anchor_boxes, _ = output.shape
-        #     box = np.zeros((grid_height, grid_width, anchor_boxes, 4))
-
-        #     # Calculate the cx, cy, width and height of the boxes
-        #     box_xy = sigmoid(output[..., :2])
-        #     box_wh = tf.exp(output[..., 2:4]) * self.anchors
-        #     box_confidence = K.sigmoid(output[..., 4:5])
-        #     box_class_prob = K.sigmoid(output[..., 5:])
-
-        #     # Calculate the top left and bottom right corners of the boxes
-        #     box[:, :, :, 0:2] = box_xy - (box_wh / 2.0)  # x1, y1
-        #     box[:, :, :, 2:4] = box_xy + (box_wh / 2.0)  # x2, y2
-
-        #     # Adjust boxes to be relative to the original image size
-        #     box[:, :, :, 0:4] *= np.tile(image_size, 2) / np.tile(
-        #         [grid_width, grid_height], 2)
-
-        #     boxes.append(box)
-        #     box_confidences.append(box_confidence)
-        #     box_class_probs.append(box_class_prob)
-
-        #     return boxes, box_confidences, box_class_probs
         boxes = []
         box_confidences = []
         box_class_probs = []
 
+        # unpack the output
         for output in outputs:
             grid_height, grid_width, anchor_boxes, _ = output.shape
+            box = np.zeros((grid_height, grid_width, anchor_boxes,
+                            4 + 1 + len(self.class_names)))
 
-            # Process box coordinates
-            box_xy = output[..., :2]
-            box_wh = output[..., 2:4]
-            box_confidence = output[..., 4:5]
-            box_class_prob = output[..., 5:]
+            # Calculate the cx, cy, width and height of the boxes
+            box_xy = sigmoid(output[..., :2])
+            box_wh = tf.exp(output[..., 2:4])
+            box_confidence = sigmoid(output[..., 4:5])
+            box_class_prob = sigmoid(output[..., 5:])
 
-            # Adjust box coordinates to be relative to the
-            # top left corner of the image
-            box_xy = (box_xy / [grid_width, grid_height]) - (box_wh / 2)
-            box_wh = box_wh / [grid_width, grid_height]
+            # Calculate the top left and bottom right corners of the boxes
+            box[:, :, :, 0:2] = box_xy - (box_wh / 2.0)  # x1, y1
+            box[:, :, :, 2:4] = box_xy + (box_wh / 2.0)  # x2, y2
 
-            # Convert boxes to x1, y1, x2, y2 format
-            box_x1y1 = box_xy
-            box_x2y2 = box_xy + box_wh
-            box = np.concatenate((box_x1y1, box_x2y2), axis=-1)
-
-            # Scale boxes back to original image shape
-            image_height, image_width = image_size
-            box = box * [image_width, image_height, image_width, image_height]
+            # Adjust boxes to be relative to the original image size
+            box[:, :, :, 0:4] *= np.tile(image_size, 2) / np.tile(
+                [grid_width, grid_height], 2)
 
             boxes.append(box)
             box_confidences.append(box_confidence)
             box_class_probs.append(box_class_prob)
 
-        return boxes, box_confidences, box_class_probs
+            return boxes, box_confidences, box_class_probs
