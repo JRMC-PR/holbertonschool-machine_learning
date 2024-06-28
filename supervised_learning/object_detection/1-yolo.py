@@ -81,7 +81,7 @@ class Yolo:
         # List to hold the class probabilities for each box in each output
         box_class_probs = []
 
-        #Unpack the outputs
+        # Unpack the outputs
         for i, output in enumerate(outputs):
             # Ig nore the rest with _
             grid_height, grid_width, anchor_boxes, _ = output.shape
@@ -147,7 +147,6 @@ class Yolo:
             box_confidence = output[..., 4:5]
             box_confidence = 1 / (1 + np.exp(-box_confidence))
             box_confidences.append(box_confidence)
-
 
             # Extract the box class probabilities and aply sigmoid
             box_class_prob = output[..., 5:]
