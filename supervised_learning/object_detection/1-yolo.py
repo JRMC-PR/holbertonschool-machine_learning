@@ -145,13 +145,13 @@ class Yolo:
 
             # Extract the box confidence and aply sigmoid
             box_confidence = output[..., 4:5]
-            box_confidence = sigmoid(box_confidence)
+            box_confidence = 1 / (1 + np.exp(-box_confidence))
             box_confidences.append(box_confidence)
 
 
             # Extract the box class probabilities and aply sigmoid
             box_class_prob = output[..., 5:]
-            box_class_prob = sigmoid(box_class_prob)
+            box_class_prob = 1 / (1 + np.exp(-box_class_prob))
             box_class_probs.append(box_class_prob)
 
         return boxes, box_confidences, box_class_probs
