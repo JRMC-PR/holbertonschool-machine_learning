@@ -81,8 +81,7 @@ class Yolo:
         # unpack the output
         for output in outputs:
             grid_height, grid_width, anchor_boxes, _ = output.shape
-            box = np.zeros((grid_height, grid_width, anchor_boxes,
-                            4 + 1 + len(self.class_names)))
+            box = np.zeros((grid_height, grid_width, anchor_boxes, 4))
 
             # Calculate the cx, cy, width and height of the boxes
             box_xy = sigmoid(output[..., :2])
@@ -102,4 +101,4 @@ class Yolo:
             box_confidences.append(box_confidence)
             box_class_probs.append(box_class_prob)
 
-            return boxes, box_confidences, box_class_probs
+        return boxes, box_confidences, box_class_probs
