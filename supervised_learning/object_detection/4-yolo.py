@@ -303,7 +303,10 @@ class Yolo:
         images_paths = []
         # Load the images
         for file in os.listdir(folder_path):
-            image = cv2.imread(folder_path + file)
-            images.append(image)
-            images_paths.append(folder_path + file)
+            image_path = os.path.join(folder_path, file)
+            if image_path is not None:
+                images_paths.append(image_path)
+                image = cv2.imread(image_path)
+            if image is not None:
+                images.append(image)
         return (images, images_paths)
