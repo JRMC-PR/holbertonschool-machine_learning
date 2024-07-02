@@ -9,14 +9,14 @@ class NST:
     """This is the class NST"""
 
     # Public class attributes
-    self.style_layers = [
+    style_layers = [
         "block1_conv1",
         "block2_conv1",
         "block3_conv1",
         "block4_conv1",
         "block5_conv1",
     ]
-    self.content_layer = "block5_conv2"
+    content_layer = "block5_conv2"
 
     # Class constructor
     def __init__(self, style_image, content_image, alpha=1e4, beta=1):
