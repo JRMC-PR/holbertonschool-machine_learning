@@ -53,15 +53,12 @@ class NST:
         """
         if type(image) is not np.ndarray or image.ndim != 3:
             raise TypeError("image must be a np.ndarray with shape (h, w, 3)")
+        max_dim = 512
         h, w, _ = image.shape
-        if h > w:
-            h_new = 512
-            w_new = int(w * (512 / h))
-        else:
-            w_new = 512
-            h_new = int(h * (512 / w))
-        image = image[tf.newaxis, ...]
-        image = tf.image.resize(image, (h_new, w_new))
-        image = image / 255
+        scale = max_dim / max(h, w)
+        h_new, w_new = int(h * scale), int(w * scale)
+        image = tf.convert_to_tensor(image, dtype=tf.float32)
+        image = tf.image.resize(image, [h_new, w_new], method='bicubic')
+        image /= 255.0
         image = tf.clip_by_value(image, 0, 1)
-        return image
+        return tf.expand_dims(image, axis=0)
