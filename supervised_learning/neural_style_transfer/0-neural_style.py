@@ -57,7 +57,7 @@ class NST:
         Returns:
             np.ndarray -- the scaled image
         """
-        error = "style_image must be a numpy.ndarray with shape (h, w, 3)"
+        error = "image must be a numpy.ndarray with shape (h, w, 3)"
         if not isinstance(image,
                           np.ndarray) or image.ndim != 3:
             raise TypeError(error)
