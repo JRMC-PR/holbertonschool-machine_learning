@@ -29,10 +29,10 @@ class NST:
         """
         if type(style_image) is not np.ndarray or style_image.ndim != 3:
             raise TypeError("style_image must be \
-                            np.ndarray with shape (h, w, 3)")
+                            numpy.ndarray with shape (h, w, 3)")
         if type(content_image) is not np.ndarray or content_image.ndim != 3:
             raise TypeError("content_image must be \
-                            np.ndarray with shape (h, w, 3)")
+                            numpy.ndarray with shape (h, w, 3)")
         if (type(alpha) is not float and type(alpha) is not int) or alpha < 0:
             raise TypeError("alpha must be a non-negative number")
         if (type(beta) is not float and type(beta) is not int) or beta < 0:
