@@ -27,11 +27,11 @@ class NST:
             alpha {float} -- the weight for style cost
             beta {float} -- the weight for content cost
         """
-        # if not isinstance(style_image, np.ndarray) or style_image.ndim != 3:
-        #     error1 = "style_image must be a numpy.ndarray with shape (h, w, 3)"
-        #     raise TypeError(error1)
-        if style_image.shape[-1] != 3:
+        if not isinstance(style_image, np.ndarray) or style_image.ndim != 3:
+            error1 = "style_image must be a numpy.ndarray with shape (h, w, 3)"
             raise TypeError(error1)
+        # if style_image.shape[-1] != 3:
+        #     raise TypeError(error1)
         if not isinstance(content_image,
                           np.ndarray) or content_image.ndim != 3:
             error2 = "content_image must be "
