@@ -41,8 +41,8 @@ class NST:
             raise TypeError("alpha must be a non-negative number")
         if (type(beta) is not float and type(beta) is not int) or beta < 0:
             raise TypeError("beta must be a non-negative number")
-        self.style_image = self.scale_image(style_image)
-        self.content_image = self.scale_image(content_image)
+        self.style_image = style_image
+        self.content_image = content_image
         self.alpha = alpha
         self.beta = beta
 
