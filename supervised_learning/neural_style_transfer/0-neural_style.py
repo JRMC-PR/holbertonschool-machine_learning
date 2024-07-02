@@ -27,15 +27,15 @@ class NST:
             alpha {float} -- the weight for style cost
             beta {float} -- the weight for content cost
         """
-        if type(style_image) is not np.ndarray or style_image.ndim != 3:
+        if not isinstance(style_image, np.ndarray) or style_image.ndim != 3:
             raise TypeError("style_image must be \
                             numpy.ndarray with shape (h, w, 3)")
-        if type(content_image) is not np.ndarray or content_image.ndim != 3:
+        if not isinstance(content_image, np.ndarray) or content_image.ndim != 3:
             raise TypeError("content_image must be \
                             numpy.ndarray with shape (h, w, 3)")
-        if (type(alpha) is not float and type(alpha) is not int) or alpha < 0:
+        if not (isinstance(alpha, (float, int)) and  alpha >= 0):
             raise TypeError("alpha must be a non-negative number")
-        if (type(beta) is not float and type(beta) is not int) or beta < 0:
+        if not (isinstance(alpha, (float, int)) and beta >= 0):
             raise TypeError("beta must be a non-negative number")
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
@@ -51,7 +51,7 @@ class NST:
         Returns:
             np.ndarray -- the scaled image
         """
-        if type(image) is not np.ndarray or image.ndim != 3:
+        if not isinstance(image, np.ndarray) and image.ndim != 3:
             raise TypeError("image must be a numpy.ndarray with shape (h, w, 3)")
         max_dim = 512
         h, w, _ = image.shape
