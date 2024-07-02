@@ -35,7 +35,7 @@ class NST:
                             numpy.ndarray with shape (h, w, 3)")
         if not (isinstance(alpha, (float, int)) and  alpha >= 0):
             raise TypeError("alpha must be a non-negative number")
-        if not (isinstance(alpha, (float, int)) and beta >= 0):
+        if not (isinstance(beta, (float, int)) and beta >= 0):
             raise TypeError("beta must be a non-negative number")
         self.style_image = self.scale_image(style_image)
         self.content_image = self.scale_image(content_image)
