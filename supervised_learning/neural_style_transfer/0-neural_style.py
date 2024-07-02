@@ -27,20 +27,18 @@ class NST:
             alpha {float} -- the weight for style cost
             beta {float} -- the weight for content cost
         """
-        if not isinstance(style_image, np.ndarray) or style_image.ndim != 3:
+        if type(style_image) is not np.ndarray or style_image.ndim != 3:
             raise TypeError("style_image must be \
-                            a numpy.ndarray with shape (h, w, 3)")
-        if not isinstance(content_image,
-                          np.ndarray) or content_image.ndim != 3:
-            raise TypeError(
-                "content_image must be a numpy.ndarray with shape (h, w, 3)"
-            )
-        if not isinstance(alpha, (float, int)) or alpha < 0:
+                            np.ndarray with shape (h, w, 3)")
+        if type(content_image) is not np.ndarray or content_image.ndim != 3:
+            raise TypeError("content_image must be \
+                            np.ndarray with shape (h, w, 3)")
+        if (type(alpha) is not float and type(alpha) is not int) or alpha < 0:
             raise TypeError("alpha must be a non-negative number")
-        if not isinstance(beta, (float, int)) or beta < 0:
+        if (type(beta) is not float and type(beta) is not int) or beta < 0:
             raise TypeError("beta must be a non-negative number")
-        self.style_image = style_image
-        self.content_image = content_image
+        self.style_image = self.scale_image(style_image)
+        self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
 
@@ -53,15 +51,17 @@ class NST:
         Returns:
             np.ndarray -- the scaled image
         """
-        if not isinstance(image, np.ndarray) or image.ndim != 3:
-            raise TypeError("image must be a \
-                            numpy.ndarray with shape (h, w, 3)")
-        max_dim = 512
+        if type(image) is not np.ndarray or image.ndim != 3:
+            raise TypeError("image must be a np.ndarray with shape (h, w, 3)")
         h, w, _ = image.shape
-        scale = max_dim / max(h, w)
-        h_new, w_new = int(h * scale), int(w * scale)
-        image = tf.convert_to_tensor(image, dtype=tf.float32)
-        image = tf.image.resize(image, [h_new, w_new], method="bicubic")
-        image /= 255.0
+        if h > w:
+            h_new = 512
+            w_new = int(w * (512 / h))
+        else:
+            w_new = 512
+            h_new = int(h * (512 / w))
+        image = image[tf.newaxis, ...]
+        image = tf.image.resize(image, (h_new, w_new))
+        image = image / 255
         image = tf.clip_by_value(image, 0, 1)
-        return tf.expand_dims(image, axis=0)
+        return image
