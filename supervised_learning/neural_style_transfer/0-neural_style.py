@@ -56,13 +56,12 @@ class NST:
         Returns:
             np.ndarray -- the scaled image
         """
+        error = "image must be a numpy.ndarray with shape (h, w, 3)"
         if not isinstance(image,
                           np.ndarray) or image.ndim != 3:
-            raise TypeError("image must be a \
-                            numpy.ndarray with shape (h, w, 3)")
+            raise TypeError(error)
         if image.shape[-1] != 3:
-            raise TypeError("image must be a \
-                            numpy.ndarray with shape (h, w, 3)")
+            raise TypeError(error)
         max_dim = 512
         h, w, _ = image.shape
         scale = max_dim / max(h, w)
