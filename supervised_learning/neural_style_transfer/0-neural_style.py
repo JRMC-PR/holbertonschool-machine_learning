@@ -28,16 +28,13 @@ class NST:
             beta {float} -- the weight for content cost
         """
         if not isinstance(style_image, np.ndarray) or style_image.ndim != 3:
-            raise TypeError(
-                "style_image must be \
-                            numpy.ndarray with shape (h, w, 3)"
-            )
+            error = "style_image must be a numpy.ndarray with shape (h, w, 3)"
+            raise TypeError(error)
         if not isinstance(content_image,
                           np.ndarray) or content_image.ndim != 3:
-            raise TypeError(
-                "content_image must be \
-                            numpy.ndarray with shape (h, w, 3)"
-            )
+            error = "content_image must be "
+            error += "a numpy.ndarray with shape (h, w, 3)"
+            raise TypeError(error)
         if not (isinstance(alpha, (float, int)) and alpha >= 0):
             raise TypeError("alpha must be a non-negative number")
         if not (isinstance(beta, (float, int)) and beta >= 0):
