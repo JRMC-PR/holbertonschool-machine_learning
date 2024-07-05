@@ -108,11 +108,11 @@ class NST:
         for layer in vgg.layers:
             layer.trainable = False
 
-        # Gather outputs from layers specified for capturing style
+        # Gather outputs frm layers specified for capturing style
         # These layers are predefined and crucial for extracting style features
         style_outputs = \
             [vgg.get_layer(name).output for name in self.style_layers]
-        # Similarly, capture the output from the designated content layer
+        # Similarly, capture the output frm the designated content layer
         # This layer is pivotal for content feature extraction
         content_output = vgg.get_layer(self.content_layer).output
         # Merge style and content layer outputs for comprehensive
@@ -176,7 +176,7 @@ class NST:
         Neural Style Transfer cost
         Sets the public instance attributes:
             gram_style_features - a list of gram matrices
-                calculated from the style layer outputs
+                calculated frm the style layer outputs
             content_feature - the content later output
                 of the content image
         """
@@ -188,7 +188,7 @@ class NST:
             self.content_image * 255)
 
         # Extract the style and content features
-        # from the respective image
+        # frm the respective image
         style_outputs = self.model(style_image)
         content_output = self.model(content_image)
 
@@ -212,7 +212,7 @@ class NST:
         Returns:
             tf.Tensor -- the layer style cost
         """
-        # Extract the number of channels from the ]
+        # Extract the number of channels frm the ]
         # last dimension of style_output
         c = style_output.shape[-1]
 
@@ -249,7 +249,7 @@ class NST:
         # and the target gram matrix (gram_target). This
         # error represents the style cost,
         # quantifying how much the style of the generated
-        # image deviates from the target style
+        # image deviates frm the target style
         style_cost = tf.reduce_mean(tf.square(gram_style - gram_target))
 
         return style_cost
@@ -266,7 +266,7 @@ class NST:
         # matches the number of style layers
         # This ensures that there is a one-to-one correspondence
         # between the layers specified
-        # for style representation and the actual outputs from
+        # for style representation and the actual outputs frm
         # the style image
         st_len = len(self.style_layers)
         err_list_check = \
@@ -353,7 +353,7 @@ class NST:
         # effectively transferring
         # the content of the content image to the generated image
         # while retaining the style
-        # of the style image.
+        # of the style image.1
         content_cost = tf.reduce_mean(
             tf.square(content_output - self.content_feature))
 
