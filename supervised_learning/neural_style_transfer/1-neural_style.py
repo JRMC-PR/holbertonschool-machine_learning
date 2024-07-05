@@ -47,7 +47,7 @@ class NST:
         self.content_image = self.scale_image(content_image)
         self.alpha = alpha
         self.beta = beta
-        self.laod_model()
+        self.load_model()
 
     @staticmethod
     def scale_image(image):
@@ -73,7 +73,7 @@ class NST:
         image = tf.clip_by_value(image, 0, 1)
         return tf.expand_dims(image, axis=0)
 
-    def laod_model(self):
+    def load_model(self):
         """Loads the model for Neural Style Transfer"""
         # Initialize VGG19 as the base model, excluding the
         # top layer (classifier)
