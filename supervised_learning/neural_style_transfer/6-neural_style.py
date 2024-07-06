@@ -329,8 +329,6 @@ class NST:
         if content_output.ndim == 3:
             # Add batch dimension
             content_output = content_output[tf.newaxis, ...]
-        # Debugging print statement to verify the shape of content_output
-        print("content_output.shape:", content_output.shape)
 
         # Validate that content_output has the same shape --
         # self.content_feature.
