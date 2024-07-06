@@ -78,7 +78,7 @@ class NST:
 
     def load_model(self):
         """Loads the model for Neural Style Transfer"""
-        # Initialize VGG19 as the base model, excluding the
+        # Initialize VGG19 -- the base model, excluding the
         # top layer (classifier)
         # The model uses the default input size of 224x224 pixels
         base_vgg = tf.keras.applications.VGG19(
@@ -332,7 +332,7 @@ class NST:
         # Debugging print statement to verify the shape of content_output
         print("content_output.shape:", content_output.shape)
 
-        # Validate that content_output has the same shape as
+        # Validate that content_output has the same shape --
         # self.content_feature.
         # This ensures that the comparison between the generated
         # image and the content image
@@ -345,7 +345,7 @@ class NST:
         if content_output.shape != self.content_feature.shape:
             raise TypeError(err_shape_check)
 
-        # Compute the content cost as the mean squared error
+        # Compute the content cost -- the mean squared error
         # between content_output
         # and self.content_feature. This cost function encourages
         # the generated image
