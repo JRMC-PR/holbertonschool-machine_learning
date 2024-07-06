@@ -340,7 +340,7 @@ class NST:
             "content_output must be a tensor of shape {}".format(cn_fe)
         if not isinstance(content_output, (tf.Tensor, tf.Variable)):
             raise TypeError(err_shape_check)
-        if content_output.shape != cn_fe:
+        if content_output.shape != self.content_feature.shape:
             raise TypeError(err_shape_check)
         if content_output.shape[-1] != 512:
             raise TypeError(err_shape_check)
@@ -358,3 +358,44 @@ class NST:
             tf.square(content_output - self.content_feature))
 
         return content_cost
+
+    def total_cost(self, generated_image):
+        """Calculates the total cost for the generated image
+        Arguments:
+            generated_image {tf.Tensor} -- the generated image
+        Returns:
+            tuple -- (J, J_content, J_style)
+                J - the total cost
+                J_content - the content cost
+                J_style - the style cost
+        """
+        # Validate the input image's type and shape
+        validation_error = \
+            "generated_image must be a tensor of shape {}".format(
+                self.content_image.shape)
+        if not isinstance(generated_image, (tf.Tensor, tf.Variable)):
+            raise TypeError(validation_error)
+        if generated_image.shape != self.content_image.shape:
+            raise TypeError(validation_error)
+
+        # Preprocess the input image for the neural network
+        # Adjust pixel values to the expected range for VGG19
+        generated_image = tf.keras.applications.vgg19.preprocess_input(
+            generated_image * 255)
+        # Obtain both style and content features from the model
+        model_outputs = self.model(generated_image)
+        # Separate style features from the model outputs
+        style_features = model_outputs[:-1]
+        # Separate content feature from the model outputs
+        content_feature = model_outputs[-1]
+
+        # Compute the style loss using the extracted style features
+        style_loss = self.style_cost(style_features)
+        # Compute the content loss using the extracted content feature
+        content_loss = self.content_cost(content_feature)
+
+        # Calculate the total loss as a weighted sum
+        # of content and style losses
+        total_loss = (self.alpha * content_loss + self.beta * style_loss)
+
+        return (total_loss, content_loss, style_loss)
