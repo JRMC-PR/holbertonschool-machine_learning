@@ -335,7 +335,7 @@ class NST:
         # This ensures that the comparison between the generated
         # image and the content image
         # is valid and meaningful.
-        cn_fe = self.content_feature
+        cn_fe = self.content_feature.shape
         err_shape_check = \
             "content_output must be a tensor of shape {}".format(cn_fe)
         if not isinstance(content_output, (tf.Tensor, tf.Variable)):
