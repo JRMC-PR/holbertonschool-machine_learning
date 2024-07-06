@@ -382,11 +382,11 @@ class NST:
         # Adjust pixel values to the expected range for VGG19
         generated_image = tf.keras.applications.vgg19.preprocess_input(
             generated_image * 255)
-        # Obtain both style and content features from the model
+        # Obtain both style and content features frm the model
         model_outputs = self.model(generated_image)
-        # Separate style features from the model outputs
+        # Separate style features frm the model outputs
         style_features = model_outputs[:-1]
-        # Separate content feature from the model outputs
+        # Separate content feature frm the model outputs
         content_feature = model_outputs[-1]
 
         # Compute the style loss using the extracted style features
