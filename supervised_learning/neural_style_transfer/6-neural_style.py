@@ -342,6 +342,8 @@ class NST:
             raise TypeError(err_shape_check)
         if content_output.shape != self.content_feature.shape:
             raise TypeError(err_shape_check)
+        if content_output.shape[-1] != cn_fe[-1]:
+            raise TypeError(err_shape_check)
 
         # Compute the content cost -- the mean squared error
         # between content_output
