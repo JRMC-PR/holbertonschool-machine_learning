@@ -22,10 +22,8 @@ def adjugate(matrix):
     if len(matrix) == 0:
         raise ValueError("matrix must be a list of lists")
 
-    # calculate the minor matrix
-    minor_matrix = minor(matrix)
     # calculate the cofactor matrix
-    cofactor_matrix = cofactor(minor_matrix)
+    cofactor_matrix = cofactor(matrix)
     # calculate the adjugate matrix
     adjugate_matrix =[list(row) for row in zip(*cofactor_matrix)]
     return adjugate_matrix
