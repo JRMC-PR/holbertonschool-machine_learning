@@ -33,7 +33,11 @@ def minor(matrix):
         return [[1]]
 
     # Validate the matrix is square and non-empty
-    if len(matrix) == 0 and not all(len(row) == len(matrix) for row in matrix):
+    height = len(matrix)
+    width = len(matrix[0])
+    if height != width:
+        raise ValueError("matrix must be a non-empty square matrix")
+    if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
     # Calculate the minor matrix
