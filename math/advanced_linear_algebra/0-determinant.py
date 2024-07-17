@@ -10,9 +10,11 @@ def determinant(matrix):
         be calculated
     Returns:
         int: the determinant of the matrix
-        """
+    """
     # Check if matrix is a list of lists
-    if not all(isinstance(row, list) for row in matrix) or not isinstance(matrix, list):
+    if not isinstance(matrix, list):
+        raise TypeError("matrix must be a list of lists")
+    if not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
     # Check if its and empty list
@@ -28,16 +30,14 @@ def determinant(matrix):
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a square matrix")
 
-
     # Base case for a 2x2 matrix
     if len(matrix) == 2:
         return matrix[0][0] * matrix[1][1] - matrix[0][1] * matrix[1][0]
-
     # Recursive case for matrix larger than 2x2
     det = 0
     for c in range(len(matrix)):
         # Remove column c from the matrix
-        minor = [row[:c] + row[c+1:] for row in matrix[1:]]
+        minor = [row[:c] + row[c + 1:] for row in matrix[1:]]
         cofactor = (-1) ** c * matrix[0][c] * determinant(minor)
         det += cofactor
     return det
