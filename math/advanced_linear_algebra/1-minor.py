@@ -1,5 +1,6 @@
 #!/usr/bin/env python3
 """This module contains the minor function"""
+determinant = __import__('0-determinant').determinant
 
 
 def minor(matrix):
@@ -22,10 +23,6 @@ def minor(matrix):
     if not all(isinstance(row, list) for row in matrix):
         raise TypeError("matrix must be a list of lists")
 
-    # Validate the matrix is square and non-empty
-    if len(matrix) == 0 or not all(len(row) == len(matrix) for row in matrix):
-        raise ValueError("matrix must be a non-empty square matrix")
-
     if len(matrix) == 0:
         raise ValueError("matrix must be a list of lists")
     # Determine if its a 0 x 0 matrix [[]]
@@ -35,15 +32,11 @@ def minor(matrix):
     if len(matrix) == 1:
         return [[1]]
 
-    def calculate_determinant(m):
-        """Calculate the determinant of a 2x2 matrix."""
-        if len(m) == 2:
-            return m[0][0] * m[1][1] - m[0][1] * m[1][0]
-        else:
-            raise ValueError(
-                "Function only supports 2x2 matrices."
-            )
+    # Validate the matrix is square and non-empty
+    if len(matrix) == 0 or not all(len(row) == len(matrix) for row in matrix):
+        raise ValueError("matrix must be a non-empty square matrix")
 
+    # Calculate the minor matrix
     minor_matrix = []
     for i in range(len(matrix)):
         minor_row = []
@@ -54,7 +47,7 @@ def minor(matrix):
             ]
             # Calculate the determinant of the sub-matrix
             if len(sub_matrix) > 1:  # Ensure the sub-matrix is at least 2x2
-                minor_row.append(calculate_determinant(sub_matrix))
+                minor_row.append(determinant(sub_matrix))
             else:
                 # For a 1x1 sub-matrix, the determinant is the element itself
                 minor_row.append(sub_matrix[0][0])
