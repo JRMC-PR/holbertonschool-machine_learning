@@ -25,17 +25,19 @@ def minor(matrix):
 
     if len(matrix) == 0:
         raise ValueError("matrix must be a list of lists")
-    # # Determine if its a 1 x 1 matrix
-    if len(matrix) == 1:
-        return [[1]]
 
     # Validate the matrix is square and non-empty
     height = len(matrix)
     width = len(matrix[0])
-    if height != width or (height == 0 and width == 1):
+
+    if height != width or (height == 1 and width == 0):
         raise ValueError("matrix must be a non-empty square matrix")
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
+
+    # check for 1 X 1 matrix
+    if len(matrix) == 1 and len(matrix[0]) == 1:
+        return [[1]]
 
     # Calculate the minor matrix
     minor_matrix = []
