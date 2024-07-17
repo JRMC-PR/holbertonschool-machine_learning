@@ -2,7 +2,6 @@
 """This module calculates the adjugate matrix
 of a square matrix
 """
-minor = __import__('1-minor').minor
 cofactor = __import__('2-cofactor').cofactor
 
 
@@ -25,5 +24,5 @@ def adjugate(matrix):
     # calculate the cofactor matrix
     cofactor_matrix = cofactor(matrix)
     # calculate the adjugate matrix
-    adjugate_matrix =[list(row) for row in zip(*cofactor_matrix)]
+    adjugate_matrix = [list(row) for row in zip(*cofactor_matrix)]
     return adjugate_matrix
