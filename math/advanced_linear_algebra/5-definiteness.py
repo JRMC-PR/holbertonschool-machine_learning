@@ -27,6 +27,8 @@ def definiteness(matrix):
         return None
     if not all(len(row) == len(matrix) for row in matrix):
         return None
+    if not np.array_equal(matrix, matrix.T):
+        return None
     eigenvalues = np.linalg.eigvals(matrix)
     if all(eigenvalues > 0):
         return "Positive definite"
