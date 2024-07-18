@@ -19,6 +19,15 @@ def inverse(matrix):
     if len(matrix) == 0:
         raise ValueError("matrix must be a list of lists")
 
+    # Validate the matrix is square and non-empty
+    height = len(matrix)
+    width = len(matrix[0])
+
+    if height != width or (height == 1 and width == 0):
+        raise ValueError("matrix must be a non-empty square matrix")
+    if not all(len(row) == len(matrix) for row in matrix):
+        raise ValueError("matrix must be a non-empty square matrix")
+
 
     detA = determinant(matrix)
     # Chck is its a singular matrix
