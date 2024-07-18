@@ -28,7 +28,6 @@ def inverse(matrix):
     if not all(len(row) == len(matrix) for row in matrix):
         raise ValueError("matrix must be a non-empty square matrix")
 
-
     detA = determinant(matrix)
     # Chck is its a singular matrix
     if detA == 0:
