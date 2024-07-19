@@ -39,6 +39,7 @@ class Exponential:
         """
         e = 2.7182818285
         pdf_val = 0
+        # Check if x is negative
         if x < 0:
             return 0
         # Calculate the PDF value for exponential distribution
@@ -54,6 +55,7 @@ class Exponential:
         """
         e = 2.7182818285
         cdf_val = 0
+        # Check if x is negative
         if x < 0:
             return 0
         # Calculate the CDF value for exponential distribution
