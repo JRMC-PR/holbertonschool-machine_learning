@@ -41,4 +41,20 @@ class Exponential:
         pdf_val = 0
         if x < 0:
             return 0
+        # Calculate the PDF value for exponential distribution
         return self.lambtha * e ** (-self.lambtha * x)
+
+    def cdf(self, x):
+        """This method calculates the value of the CDF for a
+        given time period
+        Args:
+            x (float): The time period
+        Returns:
+            The CDF value for x
+        """
+        e = 2.7182818285
+        cdf_val = 0
+        if x < 0:
+            return 0
+        # Calculate the CDF value for exponential distribution
+        return 1 - e ** (-self.lambtha * x)
