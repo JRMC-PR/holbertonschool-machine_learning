@@ -66,3 +66,23 @@ class Normal:
         pdf_val = (1 / (self.stddev * (2 * pi) ** 0.5)) * \
             e ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)
         return pdf_val
+
+    def cdf(self, x):
+        """This method calculates the value of the CDF for a
+        given x-value in normal distribution
+        Args:
+            x (float): The x-value
+        Returns:
+            The CDF value for x
+        """
+        pi = 3.1415926536
+        cdf_val = 0
+        x = (x - self.mean) / (self.stddev * (2 ** 0.5))
+        # Calculate the CDF value for normal distribution
+        x_3 = (x ** 3) / 3
+        x_5 = (x ** 5) / 10
+        x_7 = (x ** 7) / 42
+        x_9 = (x ** 9) / 216
+        er = (2 * (x - x_3 + x_5 - x_7 + x_9) / (pi ** 0.5))
+        cdf_val = (1 + er) / 2
+        return cdf_val
