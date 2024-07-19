@@ -50,3 +50,19 @@ class Normal:
             The x-value of z
         """
         return z * self.stddev + self.mean
+
+    def pdf(self, x):
+        """This method calculates the value of the PDF for a
+        given x-value in normal distribution
+        Args:
+            x (float): The x-value
+        Returns:
+            The PDF value for x
+        """
+        e = 2.7182818285
+        pi = 3.1415926536
+        pdf_val = 0
+        # Calculate the PDF value for normal distribution
+        pdf_val = (1 / (self.stddev * (2 * pi) ** 0.5)) * \
+            e ** (-0.5 * ((x - self.mean) / self.stddev) ** 2)
+        return pdf_val
