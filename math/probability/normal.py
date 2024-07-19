@@ -79,6 +79,9 @@ class Normal:
         cdf_val = 0
         x = (x - self.mean) / (self.stddev * (2 ** 0.5))
         # Calculate the CDF value for normal distribution
+        # the er function is the following function:
+        # er = (2 / (pi ** 0.5)) * (x - (x ** 3) / 3 + (x ** 5) / 10 -
+        # (x ** 7) / 42 + (x ** 9) / 216)
         x_3 = (x ** 3) / 3
         x_5 = (x ** 5) / 10
         x_7 = (x ** 7) / 42
