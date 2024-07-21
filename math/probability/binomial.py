@@ -26,7 +26,7 @@ class Binomial:
                 [(data[i] - mean) ** 2 for i in range(len(data))]
             ) / len(data)) ** 0.5)
             # calculate the lambtha value
-            self.p = 1 - ((stddev **2 ) / mean)
+            self.p = 1 - ((stddev ** 2) / mean)
             self.n = int(round(mean / self.p))
             self.p = float(mean / self.n)
         else:
