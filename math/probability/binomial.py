@@ -19,14 +19,21 @@ class Binomial:
                 raise TypeError("data must be a list")
             if len(data) < 2:
                 raise ValueError("data must contain multiple values")
+            # Caclculate mean
+            mean = float(sum(data) / len(data))
+            # Calaculate stddev
+            stddev = float((sum(
+                [(data[i] - mean) ** 2 for i in range(len(data))]
+            ) / len(data)) ** 0.5)
             # calculate the lambtha value
-            self.n = len(data)
-            self.p = float(sum(data) / len(data))
+            self.p = 1 - ((stddev **2 ) / mean)
+            self.n = int(round(mean / self.p))
+            self.p = float(mean / self.n)
         else:
             # If data is not given
             if n <= 0:
                 raise ValueError("n must be a positive value")
             if p <= 0 or p >= 1:
                 raise ValueError("p must be greater than 0 and less than 1")
-            self.n = int(n)
+            self.n = round(n)
             self.p = float(p)
