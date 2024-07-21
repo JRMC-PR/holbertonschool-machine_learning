@@ -37,3 +37,21 @@ class Binomial:
                 raise ValueError("p must be greater than 0 and less than 1")
             self.n = round(n)
             self.p = float(p)
+
+    def pmf(self, k):
+        """
+        function that calculates the probability mass function
+        for k successes
+        """
+        if not isinstance(k, int):
+            k = int(k)
+        if k is None or k < 0 or k > self.n:
+            return 0
+        return (self.fact(self.n) / (self.fact(k) * self.fact(self.n - k))) * (
+            (self.p ** k) * (1 - self.p) ** (self.n - k))
+
+    def fact(self, k):
+        """function that returns the factorial of k"""
+        if k in [0, 1]:
+            return 1
+        return k * self.fact(k - 1)
