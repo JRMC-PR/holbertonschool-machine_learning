@@ -55,3 +55,17 @@ class Binomial:
         if k in [0, 1]:
             return 1
         return k * self.fact(k - 1)
+
+    def cdf(self, k):
+        """
+        function that calculates the cumulative distribution function
+        for k successes
+        """
+        if not isinstance(k, int):
+            k = int(k)
+        if k is None or k < 0 or k > self.n:
+            return 0
+        return sum([(self.fact(self.n) /
+                    (self.fact(i) * self.fact(self.n - i)))
+                    * ((self.p ** i) * (1 - self.p) ** (self.n - i))
+                    for i in range(0, k + 1)])
