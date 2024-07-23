@@ -19,7 +19,8 @@ def likelihood(x, n, P):
         raise ValueError("n must be a positive integer")
     # Check if x is a integer thats grater or equal to 0
     if not isinstance(x, int) or x < 0:
-        raise ValueError("x must be an integer that is greater than or equal to 0")
+        error = "x must be an integer that is greater than or equal to 0"
+        raise ValueError(error)
     # Check if x i9s grater than n
     if x > n:
         raise ValueError("x cannot be greater than n")
