@@ -83,3 +83,5 @@ class MultiNormal:
         PDF = A * B
 
         return float(PDF)
+
+
