@@ -14,13 +14,28 @@ def pca(X, ndim):
         T: numpy.ndarray of shape (n, ndim) containing the transformed version
         of X
         """
-    # Ensure all dimetions have a mean between all data points
+    # # Ensure all dimetions have a mean between all data points
+    # X = X - np.mean(X, axis=0)
+
+    # # Compute the SVD:
+    # U, S, Vt = np.linalg.svd(X)
+
+    # # Compute the cumulative sum of the explained variance ratio
+    # tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
+
+    # return tr
+
+    # Ensure all dimensions have a mean between all data points
     X = X - np.mean(X, axis=0)
 
     # Compute the SVD:
     U, S, Vt = np.linalg.svd(X)
 
-    # Compute the cumulative sum of the explained variance ratio
-    tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
+    # Select the top `ndim` components
+    U_reduced = U[:, :ndim]
+    S_reduced = np.diag(S[:ndim])
 
-    return tr
+    # Compute the transformed data
+    T = np.matmul(U_reduced, S_reduced)
+
+    return T
