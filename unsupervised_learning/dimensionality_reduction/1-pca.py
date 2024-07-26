@@ -21,6 +21,6 @@ def pca(X, ndim):
     U, S, Vt = np.linalg.svd(X)
 
     # Compute the cumulative sum of the explained variance ratio
-    tr = np.matmul(U[..., :ndim], np.diag(S[:ndim]))
+    tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
 
     return tr
