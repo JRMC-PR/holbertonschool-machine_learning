@@ -12,20 +12,19 @@ def correlation(C):
         correlation: numpy.ndarray - shape (d, d) containing the
         correlation matrix
     """
-    if not isinstance(C, np.ndarray) or len(C.shape) != 2:
-        raise TypeError("C must be a 2D numpy.ndarray")
+    err_1 = "C must be a numpy.ndarray"
+    if not isinstance(C, np.ndarray):
+        raise TypeError(err_1)
+
+    err_2 = "C must be a 2D square matrix"
+    if C.ndim != 2:
+        raise ValueError(err_2)
     if C.shape[0] != C.shape[1]:
-        raise ValueError("C must be a square matrix")
-    if np.any(np.isnan(C)):
-        raise ValueError("C contains NaN")
-    if np.any(np.isinf(C)):
-        raise ValueError("C contains infinity")
-    # if np.any(np.diag(C) != 1):
-    #     raise ValueError("C must be a valid covariance matrix")
+        raise ValueError(err_2)
 
-    # Calculate the correlation matrix
-    d = C.shape[0]
-    D = np.diag(1 / np.sqrt(np.diag(C)))
-    correlation = np.dot(np.dot(D, C), D)
+    D = np.sqrt(np.diag(np.diag(C)))
+    D_inv = np.linalg.inv(D)
 
-    return correlation
+    corr = np.linalg.multi_dot([D_inv, C, D_inv.T])
+
+    return corr
