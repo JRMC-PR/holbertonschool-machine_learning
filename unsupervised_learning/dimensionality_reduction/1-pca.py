@@ -36,6 +36,6 @@ def pca(X, ndim):
     S_reduced = np.diag(S[:ndim])
 
     # Compute the transformed data
-    T = np.matmul(U_reduced, S_reduced)
+    T = np.matmul(U_reduced, S_reduced[:ndim, :ndim])
 
     return T
