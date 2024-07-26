@@ -24,5 +24,3 @@ def pca(X, ndim):
     tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
 
     return tr
-
-
