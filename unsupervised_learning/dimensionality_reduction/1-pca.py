@@ -20,7 +20,10 @@ def pca(X, ndim):
     # Compute the SVD:
     U, S, Vt = np.linalg.svd(X)
 
-    # Compute the cumulative sum of the explained variance ratio
-    tr = np.matmul(U[..., :ndim], np.diag(S[..., :ndim]))
+    # Compute the weights matrix
+    W = Vt[:ndim].T
 
-    return tr
+    # Transform the data
+    T = np.matmul(X, W)
+
+    return T
