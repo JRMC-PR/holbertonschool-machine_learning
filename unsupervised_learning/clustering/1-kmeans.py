@@ -143,4 +143,3 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distance ** 2, axis=1)
 
     return centroids, clss
-
