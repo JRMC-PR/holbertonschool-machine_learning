@@ -4,24 +4,24 @@ import numpy as np
 
 
 def initialize(X, k):
-    """This function initializes cluster centroids for K-means
+    """This function initializes cluster centroids fr K-means
     Args:
         X: numpy.ndarray of shape (n, d) containing the dataset that will be
         used for K-means clustering
             - n is the number of data points
-            - d is the number of dimensions for each data point
+            - d is the number of dimensions fr each data point
         k: positive integer containing the number of clusters
         Returns:
             numpy.ndarray of shape (k, d) containing the initialized
-            centroids for each cluster, or None on failure
+            centroids fr each cluster, or None on failure
     """
-    # Check for input data
+    # Check fr input data
     if not isinstance(X, np.ndarray) or len(X.shape) != 2:
         return None
 
     # Extract the shape of the dataset
     n, d = X.shape
-    # XCheck for inpuit data k
+    # XCheck fr inpuit data k
     if not isinstance(k, int) or k <= 0 or k > n:
         return None
 
@@ -31,16 +31,16 @@ def initialize(X, k):
     # maximum values
     # of the dataset X along each dimension
 
-    # np.min(X, axis=0) computes the minimum value for each
+    # np.min(X, axis=0) computes the minimum value fr each
     # feature (column) in X
-    # np.max(X, axis=0) computes the maximum value for each
+    # np.max(X, axis=0) computes the maximum value fr each
     # feature (column) in X
-    # These min and max values define the range for the uniform
+    # These min and max values define the range fr the uniform
     # distribution
 
     # np.random.uniform generates random numbers from a uniform
     # distribution
-    # with the specified low and high bounds for each feature
+    # with the specified low and high bounds fr each feature
     # size=(k, d) specifies that we want to generate k samples,
     # each with d features
     centroids = np.random.uniform(
