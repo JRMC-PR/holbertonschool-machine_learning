@@ -62,13 +62,14 @@ def kmeans(X, k, iterations=1000):
         Returns:
             C: numpy.ndarray of shape (k, d) containing the final centroids for
             each cluster
-            clss: numpy.ndarray of shape (n,) containing the index of the cluster in
+            clss: numpy.ndarray of shape (n,) containing the index of the
+            cluster in
             C that each data point belongs to
     """
     # Step 1: Initialize the centroids
     centroids = initialize(X, k)
 
-    #Step 1.5: Check if centroids is None and verify iterations
+    # Step 1.5: Check if centroids is None and verify iterations
     if centroids is None:
         return None, None
 
@@ -130,7 +131,6 @@ def kmeans(X, k, iterations=1000):
             else:
                 centroids[i] = np.mean(X[indixes], axis=0)
 
-
         # Step 8: Check if the centroids have converged
         if np.all(prev_centroids == centroids):
             return centroids, clss
@@ -143,5 +143,4 @@ def kmeans(X, k, iterations=1000):
         clss = np.argmin(distance ** 2, axis=1)
 
     return centroids, clss
-
 
