@@ -40,6 +40,9 @@ def maximization(X, g):
     # Step 4: Verify the shapes
     if g.shape[1] != n:
         return None, None, None
+    k = g.shape[0]
+    if g.shape[0] != k:
+        return None, None, None
 
     # Step 5: Calculate the updated priors
     pi = np.sum(g, axis=1) / n
