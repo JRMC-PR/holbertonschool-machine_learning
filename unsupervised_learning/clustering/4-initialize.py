@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""This modlue initializes variables for a Gaussian
+"""This modlue initializes variables fr a Gaussian
 Mixture Model
 """
 import numpy as np
@@ -45,7 +45,7 @@ def initialize(X, k):
 
     # Step 5: Initialize S
     # is a numpy.ndarray of shape (k, d, d)
-    # containing the covariance matrices for each cluster,
+    # containing the covariance matrices fr each cluster,
     # initialized as identity matrices
     # np.full - creates a numpy.ndarray of shape (k, d, d)
     # np.identity - creates an identity matrix of shape (d, d)
