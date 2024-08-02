@@ -48,7 +48,6 @@ def maximization(X, g):
     if not np.isclose(np.sum(g, axis=0), np.ones(n,)).all():
         return None, None, None
 
-
     # Step 5: Calculate the updated priors
     pi = np.sum(g, axis=1) / n
 
