@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-"""This modle  test for the optimum number
+"""This modle  test fr the optimum number
 of clusters by variance
 """
 import numpy as np
@@ -8,20 +8,20 @@ variance = __import__('2-variance').variance
 
 
 def optimum_k(X, kmin=1, kmax=None, iterations=1000):
-    """This function tests for the optimum number of clusters by variance
+    """This function tests fr the optimum number of clusters by variance
     Args:
         X: numpy.ndarray of shape (n, d) containing the data set
         kmin: positive integer containing the minimum number of
-        clusters to check for (inclusive)
+        clusters to check fr (inclusive)
         kmax: positive integer containing the maximum number of
-        clusters to check for (inclusive)
+        clusters to check fr (inclusive)
         iterations: positive integer containing the maximum number
-        of iterations for K-means
+        of iterations fr K-means
     Returns: results, d_vars
-        results is a list containing the outputs of K-means for each
+        results is a list containing the outputs of K-means fr each
         cluster size
         d_vars is a list containing the difference in variance from
-        the smallest cluster size for each cluster size
+        the smallest cluster size fr each cluster size
     """
     # Step 1: verify X input
     if not isinstance(X, np.ndarray) or X.ndim != 2:
@@ -51,7 +51,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
 
     # Step 6: Loop through kmin to kmax
     for k in range(kmin, kmax + 1):
-        # Step 7: Run kmeans for each k
+        # Step 7: Run kmeans fr each k
         # extract the clusters and centroids
         C, clss = kmeans(X, k, iterations)
         results.append((C, clss))
