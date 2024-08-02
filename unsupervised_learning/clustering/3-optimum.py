@@ -33,7 +33,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
     # Step 3: verify kmin and kmax
     if kmax is None:
         kmax = n
-    if not isinstance(kmin, int) or kmin <= 0 or kmin <= n:
+    if not isinstance(kmin, int) or kmin <= 0 or n <= kmin:
         return None, None
     if not isinstance(kmax, int) or kmax <= 0 or n < kmax:
         return None, None
@@ -46,7 +46,7 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
 
     # Step 5: Initialize results, variance and d_vars
     results = []
-    variance = []
+    variances = []
     d_vars = []
 
     # Step 6: Loop through kmin to kmax
@@ -60,10 +60,10 @@ def optimum_k(X, kmin=1, kmax=None, iterations=1000):
         # dataset X with respect to the centroids C
         V = variance(X, C)
         # Step 9: append the variance to the variance list
-        variance.append(V)
+        variances.append(V)
 
     # Step 10: Calculate the difference in variance
-    for var in variance:
-        d_vars.append(np.abs(variance[0] - var))
+    for var in variances:
+        d_vars.append(np.abs(variances[0] - var))
 
     return results, d_vars
