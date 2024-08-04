@@ -61,7 +61,7 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         # Print the log likelihood
         if verbose:
             # Print the log likelihood every 10 iterations
-            if i % 10 == 0 or i == iterations or i == 52:
+            if i % 10 == 0 or i == iterations or np.abs(likelihood - l_prev) <= tol:
                 print(f"Log Likelihood after {i} iterations: {likelihood:.5f}")
         # Check fr convergence
         if np.abs(likelihood - l_prev) < tol:
