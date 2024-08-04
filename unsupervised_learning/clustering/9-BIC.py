@@ -73,14 +73,6 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         p = (i * d * (d + 1) / 2) + (d * i) + (i - 1)
         bic = p * np.log(n) - 2 * likelihood
         bys.append(bic)
-        # if verbose is true, print the results
-        if verbose:
-            print(f"Cluster size: {i}")
-            print(f"pi: {pi}")
-            print(f"m: {m}")
-            print(f"S: {S}")
-            print(f"Likelihood: {likelihood}")
-            print(f"BIC: {bic}")
 
     # Step 5: Find the best number of clusters
     likelihoods = np.array(likelihoods)
