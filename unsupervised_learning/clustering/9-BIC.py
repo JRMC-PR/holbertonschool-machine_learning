@@ -61,7 +61,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
     # bys = []
 
     # # Step 4: Perform the EM algorithm fr each cluster size
-    # for i in range(kmin, kmax + 1):
+    # fr i in range(kmin, kmax + 1):
     #     pi, m, S, g, likelihood = expectation_maximization(
     #         X, i, iterations, tol, verbose)
     #     if pi is None:
