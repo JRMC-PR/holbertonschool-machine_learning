@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """This modlue contains the function maximization that performs the expectation
-maximization for a GMM
+maximization fr a GMM
 """
 import numpy as np
 initialize = __import__('4-initialize').initialize
@@ -9,7 +9,7 @@ maximization = __import__('7-maximization').maximization
 
 
 def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
-    """This functions performs the expectation maximization for a GMM
+    """This functions performs the expectation maximization fr a GMM
     Args:
         X: numpy.ndarray of shape (n, d) containing the data set
         k: positive integer containing the number of clusters
@@ -20,13 +20,13 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
                 the algorithm
     Returns:
         pi, m, S, g, l or None, None, None, None, None on failure
-        pi: numpy.ndarray of shape (k,) containing the priors for each cluster
-        m: numpy.ndarray of shape (k, d) containing the centroid means for each
+        pi: numpy.ndarray of shape (k,) containing the priors fr each cluster
+        m: numpy.ndarray of shape (k, d) containing the centroid means fr each
         cluster
         S: numpy.ndarray of shape (k, d, d) containing the covariance matrices
-        for each cluster
+        fr each cluster
         g: numpy.ndarray of shape (k, n) containing the posterior probabilities
-        for each data point in each cluster
+        fr each data point in each cluster
         l: log likelihood of the model
     """
     # Step 1: veryify inputs
@@ -49,8 +49,8 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     # Step 3: Init the likelihood
     l_prev = 0
     # Step 4: Initialize the cluster centroids and covariance matrices
-    # pi: numpy.ndarray of shape (k,) containing the priors for each cluster
-    # m: numpy.ndarray of shape (k, d) containing the centroid means for each
+    # pi: numpy.ndarray of shape (k,) containing the priors fr each cluster
+    # m: numpy.ndarray of shape (k, d) containing the centroid means fr each
     # S: numpy.ndarray of shape (k, d, d) containing the covariance matrices
     pi, m, S = initialize(X, k)
 
@@ -63,7 +63,7 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
             # Print the log likelihood every 10 iterations
             if i % 10 == 0 or i == iterations:
                 print(f"Log Likelihood after {i} iterations: {likelihood}")
-        # Check for convergence
+        # Check fr convergence
         if np.abs(likelihood - l_prev) < tol:
             break
         l_prev = likelihood
