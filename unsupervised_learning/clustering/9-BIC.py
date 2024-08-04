@@ -70,7 +70,7 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         likelihoods.append(likelihood)
 
         # Calculate the BIC
-        p = i * d + i * d * (d + 1) / 2 + (i - 1)
+        p = (i * d * (d + 1) / 2) + (d * i) + (i - 1)
         bic = p * np.log(n) - 2 * likelihood
         bys.append(bic)
 
