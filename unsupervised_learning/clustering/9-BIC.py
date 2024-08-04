@@ -47,6 +47,8 @@ def BIC(X, kmin=1, kmax=None, iterations=1000, tol=1e-5, verbose=False):
         return None, None, None, None
     if not isinstance(verbose, bool):
         return None, None, None, None
+    if kmin >= kmax:
+        return None, None, None, None
 
     # Step 2: Extract the shape from X
     n, d = X.shape
