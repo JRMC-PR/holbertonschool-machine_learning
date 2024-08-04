@@ -13,7 +13,8 @@ def kmeans(X, k):
         C, clss or None, None on failure
         C: numpy.ndarray of shape (k, d) containing the centroid means fr each
         cluster
-        clss: numpy.ndarray of shape (n,) containing the index of the cluster in
+        clss: numpy.ndarray of shape (n,) containing the index of the
+            cluster in
         C that each data point belongs to
     """
     # Step 1: Perform the kmeans algorithm
