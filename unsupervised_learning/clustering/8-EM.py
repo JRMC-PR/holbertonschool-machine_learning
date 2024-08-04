@@ -71,6 +71,5 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         # Check fr convergence
         if np.abs(likelihood - l_prev) < tol:
             break
-        l_prev = likelihood
 
     return pi, m, S, g, likelihood
