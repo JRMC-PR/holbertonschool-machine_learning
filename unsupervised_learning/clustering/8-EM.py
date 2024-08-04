@@ -56,6 +56,10 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
 
     # Step 5: Perform the EM algorithm
     for i in range(iterations + 1):
+        if i != 0:
+            l_prev = likelihood
+            # Step 5.2: Update the priors, means, and covariance matrices
+            pi, m, S = maximization(X, g)
         # Step 5.1: Calculate the log likelihood of the model
         g, likelihood = expectation(X, pi, m, S)
         # Print the log likelihood
@@ -67,8 +71,6 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
         if np.abs(likelihood - l_prev) < tol:
             break
         l_prev = likelihood
-        # Step 5.2: Update the priors, means, and covariance matrices
-        pi, m, S = maximization(X, g)
 
     return pi, m, S, g, likelihood
 
