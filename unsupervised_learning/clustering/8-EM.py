@@ -3,10 +3,9 @@
 maximization fr a GMM
 """
 import numpy as np
-
-initialize = __import__("4-initialize").initialize
-expectation = __import__("6-expectation").expectation
-maximization = __import__("7-maximization").maximization
+initialize = __import__('4-initialize').initialize
+expectation = __import__('6-expectation').expectation
+maximization = __import__('7-maximization').maximization
 
 
 def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
@@ -59,28 +58,19 @@ def expectation_maximization(X, k, iterations=1000, tol=1e-5, verbose=False):
     for i in range(iterations + 1):
         if i != 0:
             l_prev = likelihood
-            # Step 5.1-1: Update the priors, means, and covariance
-            # matrices using the maximization step
+            # Step 5.1-1: Update the priors, means, and covariance matrices
             pi, m, S = maximization(X, g)
-
         # Step 5.1: Calculate the log likelihood of the model
-        # using the expectation step
         g, likelihood = expectation(X, pi, m, S)
-
-        # Print the log likelihood if verbose mode is enabled
+        # Print the log likelihood
         if verbose:
-            # Print the log likelihood every 10 iterations, at the
-            # final iteration, or if the change in likelihood is within
-            # the tolerance
+            # Print the log likelihood every 10 iterations
             if i % 10 == 0 or i == iterations or np.abs(
                     likelihood - l_prev) <= tol:
                 print(f"Log Likelihood after {i} iterations: {likelihood:.5f}")
-
-        # Check for convergence by comparing the change in log
-        # likelihood to the tolerance
+        # Check fr convergence
         if np.abs(likelihood - l_prev) < tol:
             break
-
         l_prev = likelihood
 
     return pi, m, S, g, likelihood
