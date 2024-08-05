@@ -51,7 +51,7 @@ def regular(P):
         # Reinitialize starting probs to p
         starting_probs = np.matmul(starting_probs, P)
         # check if the steady state probabilities have been reached
-        if np.all(np.isclose(starting_probs, steady_state)):
+        if np.all(starting_probs == steady_state):
             return starting_probs
         # update the steady state probabilities
         steady_state = np.copy(starting_probs)
