@@ -3,6 +3,7 @@
 algorithm for a hidden markov model"""
 import numpy as np
 
+
 def forward(Observation, Emission, Transition, Initial):
     """Thias function calculates the forward algorithm for a hidden markov
     model
