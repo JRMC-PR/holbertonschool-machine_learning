@@ -5,6 +5,7 @@ import numpy as np
 
 class GaussianProcess:
     """This class represents a noisless 1D Gaussian process"""
+
     def __init__(self, X_init, Y_init, l=1, sigma_f=1):
         """This method initialized an oject of the class GaussianProcess
         Args:
@@ -21,7 +22,9 @@ class GaussianProcess:
         self.Y = Y_init
         self.l = l
         self.sigma_f = sigma_f
-        self.K = self.kernel(X_init, X_init)
+        self.K = self.kernel(X_init, X_init) + 1e-8 * np.eye(
+            len(self.X)
+        )  # Add jitter here
 
     def kernel(self, X1, X2):
         """This method calculates the covariance kernel matrix between two
@@ -42,8 +45,10 @@ class GaussianProcess:
         #                   transpose of X2
         # .reshape(-1, 1) reshapes the column vector to a column vector of
         #                 the same length
-        sqdist = np.sum(X1**2, 1).reshape(
-            -1, 1) + np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
+        sqdist = (
+            np.sum(X1**2, 1).reshape(
+                -1, 1) + np.sum(X2**2, 1) - 2 * np.dot(X1, X2.T)
+        )
 
         # Step 2: Calculate the covariance kernel matrix
         # self.sigma_f**2 is the variance of the black-box function
@@ -68,7 +73,8 @@ class GaussianProcess:
         #         and between X_s and X_s
         K_s = self.kernel(self.X, X_s)
         # print(f"K_s: {K_s}")
-        K_ss = self.kernel(X_s, X_s)
+        K_ss = self.kernel(
+            X_s, X_s) + 1e-8 * np.eye(len(X_s))  # Add jitter here
         # print(f"K_ss: {K_ss}")
         # Calculate the inverse of the covariance kernel matrix
         # np.linalg.inv() calculates the inverse of a matrix
@@ -101,4 +107,6 @@ class GaussianProcess:
         self.Y = np.append(self.Y, Y_new).reshape(-1, 1)
 
         # Step 2: Update the covariance kernel matrix
-        self.K = self.kernel(self.X, self.X)
+        self.K = self.kernel(self.X, self.X) + 1e-8 * np.eye(
+            len(self.X)
+        )  # Add jitter here
