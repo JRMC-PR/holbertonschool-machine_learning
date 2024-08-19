@@ -177,5 +177,6 @@ pyrightconfig.json
 *.h5
 # Text files
 *.txt
+*.keras
 
 # End of https://www.toptal.com/developers/gitignore/api/python
