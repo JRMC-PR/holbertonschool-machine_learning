@@ -72,9 +72,9 @@ def autoencoder(input_dims, hidden_layers, latent_dims, lambtha):
     # create the input layer for the decoder
     decoder_inputs = keras.Input(shape=(latent_dims,))
     # prints for data visualization
-    print(f"---" * 20)
-    print(f"decoder_inputs: {decoder_inputs}\n\nlatent_dims: {latent_dims}")
-    print(f"---" * 20)
+    # print(f"---" * 20)
+    # print(f"decoder_inputs: {decoder_inputs}\n\nlatent_dims: {latent_dims}")
+    # print(f"---" * 20)
     for idx, units in enumerate(reversed(hidden_layers)):
         # Add dense layers with the relu activation function
         layer = keras.layers.Dense(units=units, activation="relu")
