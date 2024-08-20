@@ -25,14 +25,14 @@ def autoencoder(input_dims, filters, latent_dims):
         auto: the full autoencoder model
     """
     # Step 1: Define the encoder model
-    # create the input layer for the encoder
+    # Create the input layer for the encoder
     encoder_inputs = keras.Input(shape=input_dims)
-    # print for data visualization
+    # Print for data visualization
     # print(f"---" * 20)
-    # print(f"input_dims: {input_dims}\n\nencodes_inputs: {encoder_inputs}")
+    # print(f"input_dims: {input_dims}\n\nencoder_inputs: {encoder_inputs}")
     # print(f"---" * 20)
 
-    # create the encoder layers
+    # Create the encoder layers
     for idx, units in enumerate(filters):
         # Add convolutional layers with the relu activation function
         layer = keras.layers.Conv2D(
@@ -42,19 +42,21 @@ def autoencoder(input_dims, filters, latent_dims):
             padding="same",
             activation="relu",
         )
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"layer: {layer}")
         # print(f"---" * 20)
         if idx == 0:
-            # if it is the first layer, set the input
+            # If it is the first layer, set the input
             outputs = layer(encoder_inputs)
+            # Print for data visualization
             # print(f"---" * 20)
             # print(f"outputs: {outputs.get_config()}")
             # print(f"---" * 20)
         else:
-            # if it is not the first layer, set the output of the
-            # previous layer
+            # If it is not the first layer, set the output of the previous layer
             outputs = layer(outputs)
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"output: {outputs.get_config()}")
         # print(f"---" * 20)
@@ -62,26 +64,32 @@ def autoencoder(input_dims, filters, latent_dims):
         layer = keras.layers.MaxPooling2D(
             pool_size=(2, 2), strides=None, padding="same"
         )
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"layer: {layer.get_config()}")
         # print(f"---" * 20)
 
-        # make the max pooling layer the output layer for the encoder
+        # Make the max pooling layer the output layer for the encoder
         outputs = layer(outputs)
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"outputs after max pooling: {outputs.get_config()}")
         # print(f"---" * 20)
-    # create the encoder model
+
+    # Create the encoder model
     encoder = keras.models.Model(inputs=encoder_inputs, outputs=outputs)
+    # Print for data visualization
     # print(f"---" * 20)
     # print(f"encoder summary: {encoder.summary()}")
     # print(f"---" * 20)
 
     # Step 2: Define the decoder model
+    # Create the input layer for the decoder
     decoder_inputs = keras.Input(shape=latent_dims)
-    # create the decoder layers
-    # iterate over the filters in reverse order
+    # Create the decoder layers
+    # Iterate over the filters in reverse order
     for idx, units in enumerate(reversed(filters)):
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"idx: {idx}\n\nunits: {units}")
         # print(f"---" * 20)
@@ -93,16 +101,19 @@ def autoencoder(input_dims, filters, latent_dims):
                 padding="same",
                 activation="relu",
             )
+            # Print for data visualization
             # print(f"---" * 20)
             # print(f"layer: {layer.get_config()}")
             # print(f"---" * 20)
             if idx == 0:
                 outputs = layer(decoder_inputs)
+                # Print for data visualization
                 # print(f"---" * 20)
                 # print(f"outputs: {outputs.get_config()}")
                 # print(f"---" * 20)
             else:
                 outputs = layer(outputs)
+                # Print for data visualization
                 # print(f"---" * 20)
                 # print(f"outputs: {outputs.get_config()}")
                 # print(f"---" * 20)
@@ -114,22 +125,27 @@ def autoencoder(input_dims, filters, latent_dims):
                 padding="valid",
                 activation="relu",
             )
+            # Print for data visualization
             # print(f"---" * 20)
             # print(f"layer: {layer.get_config()}")
             # print(f"---" * 20)
             outputs = layer(outputs)
+            # Print for data visualization
             # print(f"---" * 20)
             # print(f"outputs: {outputs.get_config()}")
             # print(f"---" * 20)
 
         layer = keras.layers.UpSampling2D(size=(2, 2))
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"layer: {layer.get_config()}")
         # print(f"---" * 20)
         outputs = layer(outputs)
+        # Print for data visualization
         # print(f"---" * 20)
         # print(f"outputs: {outputs.get_config()}")
         # print(f"---" * 20)
+
     layer = keras.layers.Conv2D(
         filters=input_dims[-1],
         kernel_size=(3, 3),
@@ -137,10 +153,12 @@ def autoencoder(input_dims, filters, latent_dims):
         padding="same",
         activation="sigmoid",
     )
+    # Print for data visualization
     # print(f"---" * 20)
     # print(f"layer: {layer.get_config()}")
     # print(f"---" * 20)
     outputs = layer(outputs)
+    # Print for data visualization
     # print(f"---" * 20)
     # print(f"outputs: {outputs.get_config()}")
     # print(f"---" * 20)
@@ -151,16 +169,16 @@ def autoencoder(input_dims, filters, latent_dims):
     outputs = decoder(outputs)
     auto = keras.models.Model(inputs=encoder_inputs, outputs=outputs)
 
-    # print for data visualization
+    # Print for data visualization
     # print(f"---" * 20)
-    # print(f"encoder: {encoder}")
+    # print(f"encoder: {encoder.summary()}")
     # print(f"---" * 20)
-    # print(f"decoder: {decoder}")
+    # print(f"decoder: {decoder.summary()}")
     # print(f"---" * 20)
     # print(f"auto: {auto.summary()}")
     # print(f"---" * 20)
 
-    # compile the autoencoder
+    # Compile the autoencoder
     auto.compile(optimizer="adam", loss="binary_crossentropy")
 
     return encoder, decoder, auto
