@@ -117,7 +117,7 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
         # print(f"---" * 20)
         # print(f"layer decoder: {layer}")
         # print(f"---" * 20)
-        if idx == 0:
+        if idx == len(hidden_layers) - 1:
             # if it is the first layer, set the input
             outputs = layer(decoder_inputs)
             # Print for data visualization
