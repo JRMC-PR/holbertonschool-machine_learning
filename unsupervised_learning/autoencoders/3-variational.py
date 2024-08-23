@@ -157,13 +157,13 @@ def autoencoder(input_dims, hidden_layers, latent_dims):
     auto = keras.models.Model(inputs=encoder_inputs, outputs=outputs)
 
     # print the modle summaries
-    print(f"---" * 20)
-    print(f"encoder summary: {encoder.summary()}")
-    print(f"---" * 20)
-    print(f"decoder summary: {decoder.summary()}")
-    print(f"---" * 20)
-    print(f"auto summary: {auto.summary()}")
-    print(f"---" * 20)
+    # print(f"---" * 20)
+    # print(f"encoder summary: {encoder.summary()}")
+    # print(f"---" * 20)
+    # print(f"decoder summary: {decoder.summary()}")
+    # print(f"---" * 20)
+    # print(f"auto summary: {auto.summary()}")
+    # print(f"---" * 20)
 
     # compute the loss of the modle using the binary crossentropy
     # def vae_loss(inputs, outputs):
