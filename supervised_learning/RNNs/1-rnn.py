@@ -20,14 +20,15 @@ def rnn(rnn_cell, X, h_0):
              Y: is a numpy.ndarray containing all of the outputs
     """
     # Extract the shapes from the input data
-    t, m, _ = X.shape
+    t = X.shape[0]
+    m = X.shape[1]
     # print("-"*50)
     # print("t: ", t)
     # print("m: ", m)
     # print("i: ", i)
     # print("-"*50)
     # Extract the shape of the hidden state
-    _, h = h_0.shape
+    h = h_0.shape[1]
     # print("-"*50)
     # print("h: ", h)
     # print("-"*50)
@@ -82,4 +83,4 @@ def rnn(rnn_cell, X, h_0):
         # print(f"Y[{i}]: ", Y[i])
         # print("-"*50)
 
-        return H, Y
+    return H, Y
