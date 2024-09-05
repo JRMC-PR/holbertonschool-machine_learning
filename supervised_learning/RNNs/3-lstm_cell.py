@@ -27,9 +27,6 @@ class LSTMCell:
         self.Wo = np.random.normal(size=(i + h, h))
         self.bo = np.zeros((1, h))
 
-        self.Wo = np.random.normal(size=(i + h, h))
-        self.bo = np.zeros((1, h))
-
         self.Wy = np.random.normal(size=(h, o))
         self.by = np.zeros((1, o))
 
