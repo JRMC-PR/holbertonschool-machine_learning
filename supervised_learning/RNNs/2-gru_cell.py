@@ -82,7 +82,7 @@ class GRUCell:
         # Calculate the new hidden state of the cell
         # after factroing in the update gate
         # h_next is shape (m, h)
-        h_next = update * h_prev + (1 - update) * h_r
+        h_next = update * h_r + (1 - update) * h_prev
 
         # Calculate the output of the cell
         # taking in account the new hidden state
