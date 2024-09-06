@@ -104,4 +104,5 @@ class GRUCell:
             x: numpy.ndarray
         Returns: the softmax function of x
         """
-        return np.exp(x) / np.sum(np.exp(x), axis=1, keepdims=True)
+        e_x = np.exp(x - np.max(x, axis=1, keepdims=True))
+        return e_x / np.sum(e_x, axis=1, keepdims=True)
