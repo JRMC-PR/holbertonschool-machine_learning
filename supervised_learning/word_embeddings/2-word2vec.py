@@ -31,13 +31,14 @@ def word2vec_model(
     Returtns:
         the trained model
     """
+    gensim.models.word2vec.FAST_VERSION = 1
     model = gensim.models.Word2Vec(
         sentences,
         vector_size=vector_size,
         window=window,
         min_count=min_count,
         negative=negative,
-        sg=cbow,
+        sg= 0 if cbow else 1,
         seed=seed,
         workers=workers,
         epochs=epochs,
