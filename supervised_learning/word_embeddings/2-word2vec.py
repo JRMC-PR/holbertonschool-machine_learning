@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """This modlue creates a word2vec model"""
-from gensim.models import Word2Vec
+import gensim
 
 
 def word2vec_model(
@@ -31,7 +31,7 @@ def word2vec_model(
     Returtns:
         the trained model
     """
-    model = Word2Vec(
+    model = gensim.models.Word2Vec(
         sentences=sentences,
         vector_size=vector_size,
         window=window,
