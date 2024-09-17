@@ -31,8 +31,8 @@ pd.set_option('display.max_columns', None)
 pd.set_option('display.max_rows', None)
 import math
 
-from keras.models import Sequential
-from keras.layers import LSTM, Bidirectional, Dense
+from keras.models import Sequential # type: ignore
+from keras.layers import LSTM, Bidirectional, Dense # type: ignore
 
 preprocess_data = __import__('preprocess_data').preprocess_data
 
