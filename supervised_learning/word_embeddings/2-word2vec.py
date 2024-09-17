@@ -32,7 +32,7 @@ def word2vec_model(
         the trained model
     """
     model = gensim.models.Word2Vec(
-        sentences=sentences,
+        sentences,
         vector_size=vector_size,
         window=window,
         min_count=min_count,
