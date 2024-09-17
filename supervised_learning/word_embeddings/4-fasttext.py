@@ -1,20 +1,20 @@
 #!/usr/bin/env python3
-"""This modlue creates a word2vec model"""
-import gensim
+"""This module creates a fasttext model"""
+from gensim.models import FastText
 
 
-def word2vec_model(
+def fasttext_model(
     sentences,
     vector_size=100,
     min_count=5,
-    window=5,
     negative=5,
+    window=5,
     cbow=True,
     epochs=5,
     seed=0,
     workers=1,
 ):
-    """This function creates builds and trains a word2vec model
+    """This function creates builds and trains a fasttext model
     Args:
         sentences is a list of sentences to be trained on
         vector_size is the dimensionality of the embedding layer
@@ -28,10 +28,10 @@ def word2vec_model(
         epochs is the number of iterations to train over
         seed is the seed for the random number generator
         workers is the number of worker threads to train the model
-    Returtns:
+    Returns:
         the trained model
     """
-    model = gensim.models.Word2Vec(
+    model = FastText(
         sentences,
         vector_size=vector_size,
         window=window,
