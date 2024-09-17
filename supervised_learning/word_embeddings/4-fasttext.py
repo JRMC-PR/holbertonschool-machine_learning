@@ -1,6 +1,6 @@
 #!/usr/bin/env python3
 """This module creates a fasttext model"""
-from gensim.models import FastText
+import gensim
 
 
 def fasttext_model(
@@ -31,7 +31,7 @@ def fasttext_model(
     Returns:
         the trained model
     """
-    model = FastText(
+    model = gensim.models.FastText(
         sentences,
         vector_size=vector_size,
         window=window,
