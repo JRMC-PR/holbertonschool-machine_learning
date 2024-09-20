@@ -31,6 +31,7 @@ def word2vec_model(
     Returtns:
         the trained model
     """
+    # initialize the Word2Vec model using gensim
     model = gensim.models.Word2Vec(
         sentences,
         vector_size=vector_size,
@@ -42,8 +43,11 @@ def word2vec_model(
         workers=workers,
         epochs=epochs,
     )
-
-    model.train(sentences, total_examples=model.corpus_count,
-                epochs=model.epochs)
+    # build the vocabulary
+    # this hepls to create the one-hot encoding of the words
+    model.build_vocab(sentences)
+    # train the model
+    # model.train(sentences, total_examples=model.corpus_count,
+    #             epochs=model.epochs)
 
     return model
