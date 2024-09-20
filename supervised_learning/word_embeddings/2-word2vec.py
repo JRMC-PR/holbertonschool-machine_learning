@@ -47,7 +47,7 @@ def word2vec_model(
     # this hepls to create the one-hot encoding of the words
     model.build_vocab(sentences)
     # train the model
-    # model.train(sentences, total_examples=model.corpus_count,
-    #             epochs=model.epochs)
+    model.train(sentences, total_examples=model.corpus_count,
+                epochs=model.epochs)
 
     return model
