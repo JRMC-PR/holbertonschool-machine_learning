@@ -38,7 +38,7 @@ def word2vec_model(
         window=window,
         min_count=min_count,
         negative=negative,
-        sg=cbow,
+        sg=0 if cbow else 1,
         seed=seed,
         workers=workers,
         epochs=epochs,
