@@ -31,6 +31,7 @@ def fasttext_model(
     Returns:
         the trained model
     """
+    # create the fasttext model
     model = gensim.models.FastText(
         sentences,
         vector_size=vector_size,
@@ -42,7 +43,9 @@ def fasttext_model(
         workers=workers,
         epochs=epochs,
     )
-
+    # build the vocabulary
+    model.build_vocab(sentences)
+    # train the model
     model.train(sentences, total_examples=model.corpus_count,
                 epochs=model.epochs)
 
