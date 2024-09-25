@@ -13,7 +13,8 @@ class RNNDecoder(tf.keras.layers.Layer):
                 vocab (int): represents the size of the target vocabulary
                 embedding (int): represents the dimensionality of the embedding
                     vector
-                units (int): represents the number of hidden units in the RNN cell
+                units (int): represents the number of hidden units in the
+                RNN cell
                 batch (int): represents the batch size
         """
         super(RNNDecoder, self).__init__()
@@ -49,11 +50,13 @@ class RNNDecoder(tf.keras.layers.Layer):
                 tf.Tensor, tf.Tensor: the outputs of the decoder and the new
                     hidden state
         """
-        # Pass the input through the embedding layer to convert tokens to dense vectors
+        # Pass the input through the embedding layer to convert tokens
+        # to dense vectors
         x = self.embedding(x)
 
         # Apply self-attention mechanism to get the context vector
-        context_vector, attention_weights = self.attention(s_prev, hidden_states)
+        context_vector, attention_weights = self.attention(
+            s_prev, hidden_states)
 
         # Concatenate the context vector with the embedded input
         # while reshaping the context vector
