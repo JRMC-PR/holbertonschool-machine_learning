@@ -52,7 +52,7 @@ class RNNDecoder(tf.keras.layers.Layer):
         """
         # Pass the input through the embedding layer to convert tokens
         # to dense vectors
-        x = self.embedding(x)
+        embeddings = self.embedding(x)
 
         # Apply self-attention mechanism to get the context vector
         context_vector, attention_weights = self.attention(
@@ -60,7 +60,7 @@ class RNNDecoder(tf.keras.layers.Layer):
 
         # Concatenate the context vector with the embedded input
         # while reshaping the context vector
-        x = tf.concat([tf.expand_dims(context_vector, 1), x], axis=-1)
+        x = tf.concat([tf.expand_dims(context_vector, 1), embeddings], axis=-1)
 
         # Pass the concatenated vector through the GRU layer
         output, s = self.gru(x, initial_state=s_prev)
