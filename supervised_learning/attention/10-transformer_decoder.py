@@ -55,7 +55,7 @@ class Decoder(tf.keras.layers.Layer):
         # scale the embedding by the square root of the dimension
         x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
         # add the positional encoding
-        x += self.positional_encoding[:seq_len]
+        x += self.positional_encoding[:seq_len, :]
 
         # apply the dropout layer
         x = self.dropout(x, training=training)
