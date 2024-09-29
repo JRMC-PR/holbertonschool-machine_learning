@@ -35,33 +35,69 @@ class Decoder(tf.keras.layers.Layer):
         # Set the dropout layer
         self.dropout = tf.keras.layers.Dropout(drop_rate)
 
+    # def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
+    #     """This method calls the decoder
+    #         Args:
+    #             x (tf.Tensor): contains the input to the decoder
+    #             encoder_output (tf.Tensor): contains the output of the encoder
+    #             training (bool): determines if the model is in training
+    #             look_ahead_mask (tf.Tensor): contains the mask to be applied to
+    #             the first multi head attention layer
+    #             padding_mask (tf.Tensor): contains the mask to be applied to
+    #             the second multi head attention layer
+    #         Returns:
+    #             (tf.Tensor): contains the decoder's output
+    #     """
+    #     seq_len = x.shape[1]
+
+    #     # apply the embedding layer
+    #     x = self.embedding(x)
+    #     # scale the embedding by the square root of the dimension
+    #     x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
+    #     # add the positional encoding
+    #     x += self.positional_encoding[:seq_len, :]
+
+    #     # apply the dropout layer
+    #     x = self.dropout(x, training=training)
+
+    #     for block in self.blocks:
+    #         x = block(
+    #             x, encoder_output, training, look_ahead_mask, padding_mask)
+
+    #     return x
     def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
-        """This method calls the decoder
+        """function that builds a Decoder
             Args:
-                x (tf.Tensor): contains the input to the decoder
-                encoder_output (tf.Tensor): contains the output of the encoder
-                training (bool): determines if the model is in training
-                look_ahead_mask (tf.Tensor): contains the mask to be applied to
-                the first multi head attention layer
-                padding_mask (tf.Tensor): contains the mask to be applied to
-                the second multi head attention layer
-            Returns:
-                (tf.Tensor): contains the decoder's output
+                x is a tensor of shape (batch, target_seq_len, dm)containing
+                the input to the decoder
+                encoder_output is a tensor of shape (batch, input_seq_len, dm)
+                containing the output of the encoder
+                training is a boolean to determine if the model is training
+                look_ahead_mask is the mask to be applied to the first multi
+                head attention layer
+                padding_mask is the mask to be applied to the second multi
+                head attention layer
+            Returns: a tensor of shape (batch, target_seq_len, dm) containing
+            the decoder output
         """
+
+        # seq_len = tf.shape(x)[1]
         seq_len = x.shape[1]
 
-        # apply the embedding layer
-        x = self.embedding(x)
-        # scale the embedding by the square root of the dimension
-        x *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
-        # add the positional encoding
-        x += self.positional_encoding[:seq_len, :]
+        # Compute the embeddings; shape (batch_size, input_seq_len, dm)
+        embeddings = self.embedding(x)
+        # Scale the embeddings
+        embeddings *= tf.math.sqrt(tf.cast(self.dm, tf.float32))
+        # Sum the positional encodings with the embeddings
+        embeddings += self.positional_encoding[:seq_len, :]
+        # Pass the embeddings on to the dropout layer
+        output = self.dropout(embeddings, training=training)
 
-        # apply the dropout layer
-        x = self.dropout(x, training=training)
+        # Pass the output on to the N encoder blocks (one by one)
+        for i in range(self.N):
+            output = self.blocks[i](output, encoder_output, training,
+                                    look_ahead_mask, padding_mask)
 
-        for block in self.blocks:
-            x = block(
-                x, encoder_output, training, look_ahead_mask, padding_mask)
+        # Note: shape of all output tensors (batch_size, input_seq_len, dm)
 
-        return x
+        return output
