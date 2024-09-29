@@ -1,5 +1,5 @@
 #!/usr/bin/env python3
-# """This modlue contains the RNNDcoder class"""
+"""This modlue contains the RNNDcoder class"""
 import tensorflow as tf
 SelfAttention = __import__('1-self_attention').SelfAttention
 
@@ -11,7 +11,8 @@ SelfAttention = __import__('1-self_attention').SelfAttention
 #         """RNNDecoder constructor
 #             Args:
 #                 vocab (int): represents the size of the target vocabulary
-#                 embedding (int): represents the dimensionality of the embedding
+#                 embedding (int): represents the dimensionality of the
+# embedding
 #                     vector
 #                 units (int): represents the number of hidden units in the
 #                 RNN cell
@@ -45,7 +46,8 @@ SelfAttention = __import__('1-self_attention').SelfAttention
 #                 s_prev (tf.Tensor): a tensor of shape (batch, units)
 #                     containing the previous decoder hidden state
 #                 hidden_states (tf.Tensor): a tensor of shape (batch,
-#                     input_seq_len, units) containing the outputs of the encoder
+#                     input_seq_len, units) containing the outputs of the
+# encoder
 #             Returns:
 #                 tf.Tensor, tf.Tensor: the outputs of the decoder and the new
 #                     hidden state
@@ -60,7 +62,8 @@ SelfAttention = __import__('1-self_attention').SelfAttention
 
 #         # Concatenate the context vector with the embedded input
 #         # while reshaping the context vector
-#         x = tf.concat([tf.expand_dims(context_vector, 1), embeddings], axis=-1)
+#         x = tf.concat([tf.expand_dims(context_vector, 1), embeddings],
+#  axis=-1)
 
 #         # Pass the concatenated vector through the GRU layer
 #         output, s = self.gru(x, initial_state=s_prev)
