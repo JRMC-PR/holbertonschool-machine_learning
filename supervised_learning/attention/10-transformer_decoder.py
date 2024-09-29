@@ -35,13 +35,16 @@ class Decoder(tf.keras.layers.Layer):
         # Set the dropout layer
         self.dropout = tf.keras.layers.Dropout(drop_rate)
 
-    # def call(self, x, encoder_output, training, look_ahead_mask, padding_mask):
+    # def call(self, x, encoder_output, training, look_ahead_mask,
+    # padding_mask):
     #     """This method calls the decoder
     #         Args:
     #             x (tf.Tensor): contains the input to the decoder
-    #             encoder_output (tf.Tensor): contains the output of the encoder
+    #             encoder_output (tf.Tensor): contains the output of the
+    # encoder
     #             training (bool): determines if the model is in training
-    #             look_ahead_mask (tf.Tensor): contains the mask to be applied to
+    #             look_ahead_mask (tf.Tensor): contains the mask to be applied
+    # to
     #             the first multi head attention layer
     #             padding_mask (tf.Tensor): contains the mask to be applied to
     #             the second multi head attention layer
