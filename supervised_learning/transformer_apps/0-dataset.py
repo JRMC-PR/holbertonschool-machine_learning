@@ -2,7 +2,7 @@
 """This module contains the class Dataset
    that loads and prepares a dataset for machine translation."""
 import tensorflow_datasets as tfds
-from transformers import BertTokenizer
+import transformers
 
 
 class Dataset:
@@ -42,10 +42,11 @@ class Dataset:
             tokenizer_en (BertTokenizer): English tokenizer
         """
         # Load pre-trained tokenizers
-        tokenizer_pt = BertTokenizer.from_pretrained(
+        tokenizer_pt = transformers.BertTokenizer.from_pretrained(
             "neuralmind/bert-base-portuguese-cased"
         )
-        tokenizer_en = BertTokenizer.from_pretrained("bert-base-uncased")
+        tokenizer_en = transformers.BertTokenizer.from_pretrained(
+            "bert-base-uncased")
 
         # Train the tokenizers with a maximum vocabulary size of 2**13
         tokenizer_pt.add_tokens(
