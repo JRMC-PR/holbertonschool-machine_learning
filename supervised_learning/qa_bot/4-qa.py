@@ -72,17 +72,22 @@ def question_answer(question, reference):
     Finds a snippet of text within a reference document to answer a question.
 
     :param question: str, containing the question to answer
-    :param reference: str, containing the reference document from which to find the answer
-    :return: str, containing the answer or None if no answer is found
+    :param reference: str, containing the reference document from which to
+    find the answer
+    :return: str, containing the answer or None if no answer is
+    found
     """
     # Load the pre-trained BERT tokenizer
-    tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    tokenizer = BertTokenizer.from_pretrained(
+        'bert-large-uncased-whole-word-masking-finetuned-squad')
 
     # Load the BERT model for question answering
-    model = TFBertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    model = TFBertForQuestionAnswering.from_pretrained(
+        'bert-large-uncased-whole-word-masking-finetuned-squad')
 
     # Tokenize the input question and reference
-    inputs = tokenizer.encode_plus(question, reference, add_special_tokens=True, return_tensors="tf")
+    inputs = tokenizer.encode_plus(
+        question, reference, add_special_tokens=True, return_tensors="tf")
 
     # Get the input IDs, attention mask, and token type IDs
     input_ids = inputs["input_ids"]
@@ -90,7 +95,9 @@ def question_answer(question, reference):
     token_type_ids = inputs["token_type_ids"]
 
     # Make predictions using the BERT model
-    outputs = model(input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+    outputs = model(
+        input_ids,
+        attention_mask=attention_mask, token_type_ids=token_type_ids)
     start_logits, end_logits = outputs.start_logits, outputs.end_logits
 
     # Find the start and end positions of the answer
@@ -109,9 +116,11 @@ def question_answer(question, reference):
 
 def question_answer_loop(corpus_path):
     """
-    Continuously prompts the user for questions and answers them using the reference texts.
+    Continuously prompts the user for questions and answers
+    them using the reference texts.
 
-    :param corpus_path: str, containing the path to the corpus of reference documents
+    :param corpus_path: str, containing the path to the
+    corpus of reference documents
     """
     exit_commands = ['exit', 'quit', 'goodbye', 'bye']
     while True:
@@ -119,7 +128,8 @@ def question_answer_loop(corpus_path):
         if question.lower() in exit_commands:
             print('A: Goodbye')
             break
-        reference = semantic_search(corpus_path, question)
+        reference = semantic_search(
+            corpus_path, question)
         answer = question_answer(question, reference)
         if answer:
             print(f'A: {answer}')

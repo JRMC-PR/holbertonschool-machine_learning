@@ -2,22 +2,29 @@
 import tensorflow as tf
 from transformers import BertTokenizer, TFBertForQuestionAnswering
 
+
 def question_answer(question, reference):
     """
-    Finds a snippet of text within a reference document to answer a question.
+    Finds a snippet of text within a reference document
+    to answer a question.
 
     :param question: str, containing the question to answer
-    :param reference: str, containing the reference document from which to find the answer
+    :param reference: str, containing the reference
+      document from which to find the answer
     :return: str, containing the answer or None if no answer is found
     """
     # Load the pre-trained BERT tokenizer
-    tokenizer = BertTokenizer.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    tokenizer = BertTokenizer.from_pretrained(
+        'bert-large-uncased-whole-word-masking-finetuned-squad')
 
     # Load the BERT model for question answering
-    model = TFBertForQuestionAnswering.from_pretrained('bert-large-uncased-whole-word-masking-finetuned-squad')
+    model = TFBertForQuestionAnswering.from_pretrained(
+        'bert-large-uncased-whole-word-masking-finetuned-squad')
 
     # Tokenize the input question and reference
-    inputs = tokenizer.encode_plus(question, reference, add_special_tokens=True, return_tensors="tf")
+    inputs = tokenizer.encode_plus(
+        question, reference,
+        add_special_tokens=True, return_tensors="tf")
 
     # Get the input IDs, attention mask, and token type IDs
     input_ids = inputs["input_ids"]
@@ -25,7 +32,9 @@ def question_answer(question, reference):
     token_type_ids = inputs["token_type_ids"]
 
     # Make predictions using the BERT model
-    outputs = model(input_ids, attention_mask=attention_mask, token_type_ids=token_type_ids)
+    outputs = model(
+        input_ids, attention_mask=attention_mask,
+        token_type_ids=token_type_ids)
     start_logits, end_logits = outputs.start_logits, outputs.end_logits
 
     # Find the start and end positions of the answer
@@ -41,9 +50,11 @@ def question_answer(question, reference):
 
     return answer
 
+
 def answer_loop(reference):
     """
-    Continuously prompts the user for questions and answers them using the reference text.
+    Continuously prompts the user for questions
+    and answers them using the reference text.
 
     :param reference: str, containing the reference text
     """
@@ -58,4 +69,3 @@ def answer_loop(reference):
             print(f'A: {answer}')
         else:
             print('A: Sorry, I do not understand your question.')
-
