@@ -182,3 +182,16 @@ pyrightconfig.json
 *.zip
 
 # End of https://www.toptal.com/developers/gitignore/api/python
+
+*.ips
+lib*
+*.nro
+*.nps
+*.nsp
+*.ini
+*.bin
+*.ovl
+*.license
+*.romfs
+*.flag
+package3
