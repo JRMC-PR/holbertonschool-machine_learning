@@ -14,5 +14,5 @@ def index(df):
     """
     # Set the column 'Timestamp' as the index of the dataframe
     if 'Timestamp' in df.columns:
-        df = df.reset_index('Timestamp')
+        df = df.set_index('Timestamp')
     return df
