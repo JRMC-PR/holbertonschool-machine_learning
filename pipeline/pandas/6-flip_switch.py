@@ -3,7 +3,8 @@
 
 
 def flip_switch(df):
-    """This function sorts data in reverse chronological order
+    """This function sorts data in reverse chronological
+    order
 
     Args:
         df: the dataframe to flip
@@ -12,5 +13,5 @@ def flip_switch(df):
         The flipped dataframe
     """
     # Sort the dataframe in reverse chronological order
-    #trasnpose is used to flip the dataframe
+    # trasnpose is used to flip the dataframe
     return df.sort_index(ascending=False).transpose()
