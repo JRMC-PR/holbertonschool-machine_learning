@@ -11,5 +11,5 @@ def prune(df):
         Returns:
             The pruned dataframe
         """
-        # Prune the dataframe to only contain the columns 'Close'
+    # Prune the dataframe to only contain the columns 'Close'
     return df.dropna(subset=['Close'])
