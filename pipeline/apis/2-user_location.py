@@ -2,26 +2,9 @@
 """
 This mdoule fetches the location of a GitHub user from the GitHub API.
 """
-import sys
 import requests
-from datetime import datetime
-
-
-def get_user_location(api_url):
-    """
-    This function fetches the location of a GitHub user from the GitHub API.
-    Args:
-        api_url: the URL to fetch the user data from
-
-    """
-#!/usr/bin/env python3
-"""
-Print the location of a specific GitHub user
-"""
 import sys
-import requests
 from datetime import datetime
-
 
 def get_user_location(api_url):
     """
@@ -53,16 +36,11 @@ def get_user_location(api_url):
             print(location)
         else:
             print("No location found")
-    # Any other unexpected status code
-    else:
-        print(f"Unexpected status code: {response.status_code}")
 
-
-if __name__ == "__main__":
-    # Check that the script receives a URL as the argument
+if __name__ == '__main__':
     if len(sys.argv) != 2:
-        print("Usage: ./2-user_location.py <GitHub API user URL>")
-    else:
-        # Extract URL passed as argument
-        api_url = sys.argv[1]
-        get_user_location(api_url)
+        print("Usage: ./2-user_location.py <GitHub API URL>")
+        sys.exit(1)
+
+    api_url = sys.argv[1]
+    get_user_location(api_url)
