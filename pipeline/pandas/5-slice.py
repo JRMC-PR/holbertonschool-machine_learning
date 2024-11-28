@@ -14,4 +14,5 @@ def slice(df):
         The sliced dataframe
     """
     # Return the columns 'High' and 'Close'
+    # iloc[::60] is used to slice the dataframe every 60 rows
     return df[['High', 'Low', 'Close', 'Volume_(BTC)']].iloc[::60]
