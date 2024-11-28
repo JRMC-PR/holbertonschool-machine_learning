@@ -14,7 +14,7 @@ def sentientPlanets():
     url = "https://swapi-api.hbtn.io/api/species/"
     planets_list = []
 
-    while species_url:
+    while url:
         # Send a GET request to the species URL
         response = requests.get(url)
 
