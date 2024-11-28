@@ -13,6 +13,6 @@ def index(df):
         The dataframe with the index set
     """
     # Set the column 'Timestamp' as the index of the dataframe
-    if 'Timestamp' not in df.columns:
+    if 'Timestamp' in df.columns:
         df = df.reset_index('Timestamp')
     return df
