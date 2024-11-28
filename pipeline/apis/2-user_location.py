@@ -6,6 +6,7 @@ import requests
 import sys
 from datetime import datetime
 
+
 def get_user_location(api_url):
     """
     Fetch the location of a GitHub user from the GitHub API.
@@ -36,6 +37,7 @@ def get_user_location(api_url):
             print(location)
         else:
             print("No location found")
+
 
 if __name__ == '__main__':
     if len(sys.argv) != 2:
