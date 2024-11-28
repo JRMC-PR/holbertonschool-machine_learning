@@ -14,4 +14,4 @@ def slice(df):
         The sliced dataframe
     """
     # Return the columns 'High' and 'Close'
-    return df[['High', 'Low', 'Close', 'Volume_(BTC)']].iloc[::50]
+    return df[['High', 'Low', 'Close', 'Volume_(BTC)']].iloc[::60]
