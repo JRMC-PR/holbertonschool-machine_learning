@@ -47,6 +47,6 @@ def sentientPlanets():
                             planets_list.append(homeworld_name)
 
         # Get the URL for the next page of species
-        species_url = data.get("next")
+        url = data.get("next")
 
     return planets_list
