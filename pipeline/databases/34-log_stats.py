@@ -28,5 +28,6 @@ def log_stats(logs_collection):
 
 if __name__ == "__main__":
     client = MongoClient('mongodb://127.0.0.1:27017')
-    logs_collection = client.logs.nginx
+    db = client.logs  # Replace with your database name
+    logs_collection = db.nginx  # Replace with your collection name
     log_stats(logs_collection)
