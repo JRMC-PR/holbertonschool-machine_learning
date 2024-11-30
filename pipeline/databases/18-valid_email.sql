@@ -1,0 +1,1 @@
+-- SQL script for 18-valid_email.sql

@@ -1,0 +1,1 @@
+-- SQL script for 20-average_score.sql
