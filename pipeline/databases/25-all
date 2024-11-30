@@ -1,1 +1,2 @@
-# Placeholder for 25-all
+// Lists all documents in the collection 'school'
+db.school.find()

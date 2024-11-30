@@ -1,1 +1,2 @@
-# Placeholder for 23-use_or_create_database
+// list databases
+show dbs
