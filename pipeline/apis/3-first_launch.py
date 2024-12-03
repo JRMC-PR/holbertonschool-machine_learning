@@ -38,11 +38,10 @@ def get_first_launch():
 
     # Extract launch details
     launch_name = first_launch["name"]
-    launch_date = (
-        datetime.fromtimestamp(first_launch["date_unix"], pytz.utc)
-        .astimezone()
-        .isoformat()
-    )
+    launch_date_utc = datetime.fromtimestamp(
+        first_launch["date_unix"], pytz.utc)
+    launch_date_local = launch_date_utc.astimezone(
+        pytz.timezone("America/New_York")).isoformat()
     rocket_id = first_launch["rocket"]
     launchpad_id = first_launch["launchpad"]
 
@@ -61,7 +60,7 @@ def get_first_launch():
     # Format and display the launch information
     name_loca = f"{launchpad_name} ({launchpad_locality})"
     print(
-        f"{launch_name} ({launch_date}) {rocket_name} - {name_loca}"
+        f"{launch_name} ({launch_date_local}) {rocket_name} - {name_loca}"
     )
 
 
