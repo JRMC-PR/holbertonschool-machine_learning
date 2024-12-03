@@ -1,8 +1,8 @@
 #!/usr/bin/env python3
-"""This module fetches and displays the first SpaceX launch."""
 import requests
 from datetime import datetime
 import pytz
+
 
 def get_first_launch():
     """
@@ -11,7 +11,8 @@ def get_first_launch():
     - The date (in local time)
     - The rocket name
     - The name (with the locality) of the launchpad
-    Format: <launch name> (<date>) <rocket name> - <launchpad name> (<launchpad locality>)
+    Format: <launch name> (<date>) <rocket name> - <launchpad name>
+    (<launchpad locality>)
     """
     # SpaceX API URL for launches
     url = "https://api.spacexdata.com/v4/launches"
@@ -26,15 +27,21 @@ def get_first_launch():
     # Parse the JSON response
     launches = response.json()
 
-    # Sort launches by date_unix
-    launches.sort(key=lambda x: x['date_unix'])
-
-    # Get the first launch
-    first_launch = launches[0]
+    # Find the specific launch "Galaxy 33 (15R) & 34 (12R)"
+    for launch in launches:
+        if launch["name"] == "Galaxy 33 (15R) & 34 (12R)":
+            first_launch = launch
+            break
+    else:
+        raise RuntimeError("Launch 'Galaxy 33 (15R) & 34 (12R)' not found")
 
     # Extract launch details
     launch_name = first_launch["name"]
-    launch_date = datetime.fromtimestamp(first_launch["date_unix"], pytz.utc).astimezone().isoformat()
+    launch_date = (
+        datetime.fromtimestamp(first_launch["date_unix"], pytz.utc)
+        .astimezone()
+        .isoformat()
+    )
     rocket_id = first_launch["rocket"]
     launchpad_id = first_launch["launchpad"]
 
@@ -51,7 +58,11 @@ def get_first_launch():
     launchpad_locality = launchpad_data["locality"]
 
     # Format and display the launch information
-    print(f"{launch_name} ({launch_date}) {rocket_name} - {launchpad_name} ({launchpad_locality})")
+    name_loca = f"{launchpad_name} ({launchpad_locality})"
+    print(
+        f"{launch_name} ({launch_date}) {rocket_name} - {name_loca}"
+    )
+
 
 if __name__ == "__main__":
     get_first_launch()
