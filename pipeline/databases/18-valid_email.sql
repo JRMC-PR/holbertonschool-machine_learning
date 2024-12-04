@@ -1,5 +1,6 @@
 -- SQL script for 18-valid_email.sql
 DELIMITER //
+
 CREATE TRIGGER reset_valid_email_on_change
 BEFORE UPDATE ON users
 FOR EACH ROW
@@ -8,4 +9,5 @@ BEGIN
         SET NEW.valid_email = 0;
     END IF;
 END //
-DELIMITER;
+
+DELIMITER ;
