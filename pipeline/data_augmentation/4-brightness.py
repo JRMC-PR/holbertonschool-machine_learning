@@ -13,4 +13,4 @@ def change_brightness(image, max_delta):
     """
     # Adjust the brightness of the image
     # the method adjust_brightness() adjusts the brightness of the image
-    return tf.image.adjust_brightness(image, max_delta)
+    return tf.image.random_brightness(image, max_delta)
