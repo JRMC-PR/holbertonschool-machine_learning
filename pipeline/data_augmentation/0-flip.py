@@ -8,4 +8,6 @@ def flip_image(image):
     Args: image is a 3d tf.tensor containing the image to flip
     Returns: The flipped image
     """
+    # Flip the image horizontally
+    # the method flip_left_right() flips the image horizontally
     return tf.image.flip_left_right(image)
